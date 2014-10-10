@@ -1248,9 +1248,15 @@ class AvdCreationPresenter {
             ISystemImage[] images = target.getSystemImages();
 
             if ((images == null || images.length == 0) && !target.isPlatform()) {
-                // If an add-on does not provide any system images, use the ones
-                // from the parent.
-                images = target.getParent().getSystemImages();
+                // This is an add-on and it does not provide any system image.
+
+                // Before LMP / Tools 23.0.4, the behavior was to provide the
+                // parent (platform) system-image using this code:
+                //
+                // images = target.getParent().getSystemImages();
+                //
+                // After tools 23.0.4, the behavior is to NOT provide the
+                // platform system-image for the add-on.
             }
 
             if (images != null) {
