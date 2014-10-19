@@ -100,8 +100,10 @@ public class SdkManagerTest2 extends SdkManagerTestCase {
                 "P Nexus 10\n" +
                 "P Nexus 4\n" +
                 "P Nexus 5\n" +
+                "P Nexus 6\n" +
                 "P Nexus 7 2013\n" +
                 "P Nexus 7\n" +
+                "P Nexus 9\n" +
                 "P Nexus One\n" +
                 "P Nexus S\n" +
                 "P 2.7in QVGA\n" +
@@ -168,79 +170,87 @@ public class SdkManagerTest2 extends SdkManagerTestCase {
                 "P     Name: Nexus 5\n" +
                 "P     OEM : Google\n" +
                 "P ---------\n" +
-                "P id: 10 or \"Nexus 7 2013\"\n" +
+                "P id: 10 or \"Nexus 6\"\n" +
+                "P     Name: Nexus 6\n" +
+                "P     OEM : Google\n" +
+                "P ---------\n" +
+                "P id: 11 or \"Nexus 7 2013\"\n" +
                 "P     Name: Nexus 7\n" +
                 "P     OEM : Google\n" +
                 "P ---------\n" +
-                "P id: 11 or \"Nexus 7\"\n" +
+                "P id: 12 or \"Nexus 7\"\n" +
                 "P     Name: Nexus 7 (2012)\n" +
                 "P     OEM : Google\n" +
                 "P ---------\n" +
-                "P id: 12 or \"Nexus One\"\n" +
+                "P id: 13 or \"Nexus 9\"\n" +
+                "P     Name: Nexus 9\n" +
+                "P     OEM : Google\n" +
+                "P ---------\n" +
+                "P id: 14 or \"Nexus One\"\n" +
                 "P     Name: Nexus One\n" +
                 "P     OEM : Google\n" +
                 "P ---------\n" +
-                "P id: 13 or \"Nexus S\"\n" +
+                "P id: 15 or \"Nexus S\"\n" +
                 "P     Name: Nexus S\n" +
                 "P     OEM : Google\n" +
                 "P ---------\n" +
-                "P id: 14 or \"2.7in QVGA\"\n" +
+                "P id: 16 or \"2.7in QVGA\"\n" +
                 "P     Name: 2.7\" QVGA\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 15 or \"2.7in QVGA slider\"\n" +
+                "P id: 17 or \"2.7in QVGA slider\"\n" +
                 "P     Name: 2.7\" QVGA slider\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 16 or \"3.2in HVGA slider (ADP1)\"\n" +
+                "P id: 18 or \"3.2in HVGA slider (ADP1)\"\n" +
                 "P     Name: 3.2\" HVGA slider (ADP1)\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 17 or \"3.2in QVGA (ADP2)\"\n" +
+                "P id: 19 or \"3.2in QVGA (ADP2)\"\n" +
                 "P     Name: 3.2\" QVGA (ADP2)\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 18 or \"3.3in WQVGA\"\n" +
+                "P id: 20 or \"3.3in WQVGA\"\n" +
                 "P     Name: 3.3\" WQVGA\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 19 or \"3.4in WQVGA\"\n" +
+                "P id: 21 or \"3.4in WQVGA\"\n" +
                 "P     Name: 3.4\" WQVGA\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 20 or \"3.7 FWVGA slider\"\n" +
+                "P id: 22 or \"3.7 FWVGA slider\"\n" +
                 "P     Name: 3.7\" FWVGA slider\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 21 or \"3.7in WVGA (Nexus One)\"\n" +
+                "P id: 23 or \"3.7in WVGA (Nexus One)\"\n" +
                 "P     Name: 3.7\" WVGA (Nexus One)\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 22 or \"4in WVGA (Nexus S)\"\n" +
+                "P id: 24 or \"4in WVGA (Nexus S)\"\n" +
                 "P     Name: 4\" WVGA (Nexus S)\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 23 or \"4.65in 720p (Galaxy Nexus)\"\n" +
+                "P id: 25 or \"4.65in 720p (Galaxy Nexus)\"\n" +
                 "P     Name: 4.65\" 720p (Galaxy Nexus)\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 24 or \"4.7in WXGA\"\n" +
+                "P id: 26 or \"4.7in WXGA\"\n" +
                 "P     Name: 4.7\" WXGA\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 25 or \"5.1in WVGA\"\n" +
+                "P id: 27 or \"5.1in WVGA\"\n" +
                 "P     Name: 5.1\" WVGA\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 26 or \"5.4in FWVGA\"\n" +
+                "P id: 28 or \"5.4in FWVGA\"\n" +
                 "P     Name: 5.4\" FWVGA\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 27 or \"7in WSVGA (Tablet)\"\n" +
+                "P id: 29 or \"7in WSVGA (Tablet)\"\n" +
                 "P     Name: 7\" WSVGA (Tablet)\n" +
                 "P     OEM : Generic\n" +
                 "P ---------\n" +
-                "P id: 28 or \"10.1in WXGA (Tablet)\"\n" +
+                "P id: 30 or \"10.1in WXGA (Tablet)\"\n" +
                 "P     Name: 10.1\" WXGA (Tablet)\n" +
                 "P     OEM : Generic\n",
                 getLog().toString());
