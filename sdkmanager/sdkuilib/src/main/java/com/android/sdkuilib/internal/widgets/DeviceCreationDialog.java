@@ -914,9 +914,11 @@ public class DeviceCreationDialog extends GridDialog {
             builder.setManufacturer("User");
             builder.setName(mDeviceName.getText());
 
-            builder.setTagId(mDevice.getTagId());
-            for (Map.Entry<String, String> entry : mDevice.getBootProps().entrySet()) {
-                builder.addBootProp(entry.getKey(), entry.getValue());
+            if (mDevice != null) {
+                builder.setTagId(mDevice.getTagId());
+                for (Map.Entry<String, String> entry : mDevice.getBootProps().entrySet()) {
+                    builder.addBootProp(entry.getKey(), entry.getValue());
+                }
             }
 
             builder.addSoftware(mSoftware);
