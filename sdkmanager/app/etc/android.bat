@@ -18,7 +18,7 @@ rem Command-line reference:
 rem   http://technet.microsoft.com/en-us/library/bb490890.aspx
 
 rem don't modify the caller's environment
-setlocal
+setlocal enableextensions
 
 rem Set up prog to be the path of this script, including following symlinks,
 rem and set up progdir to be the fully-qualified pathname of its directory.
