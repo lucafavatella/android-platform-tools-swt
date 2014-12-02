@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import com.android.ddmlib.AdbCommandRejectedException;
+import com.android.ddmlib.DdmPreferences;
 import com.android.ddmlib.IDevice;
 import com.android.ddmlib.InstallException;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
@@ -263,9 +264,7 @@ public class AdbChimpDevice implements IChimpDevice {
 
     @Override
     public String shell(String cmd) {
-        // 5000 is the default timeout from the ddmlib.
-        // This timeout arg is needed to the backwards compatibility.
-        return shell(cmd, 5000);
+        return shell(cmd, DdmPreferences.getTimeOut());
     }
 
     @Override
