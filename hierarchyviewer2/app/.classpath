@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="ANDROID_OUT_FRAMEWORK/swt.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/hierarchyviewer2lib"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/ddmlib"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/ddmuilib"/>
