@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../base/annotations/android-annotations.iml" filepath="$PROJECT_DIR$/../base/annotations/android-annotations.iml" />
       <module fileurl="file://$PROJECT_DIR$/../base/common/common.iml" filepath="$PROJECT_DIR$/../base/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/../base/ddmlib/ddmlib.iml" filepath="$PROJECT_DIR$/../base/ddmlib/ddmlib.iml" />
       <module fileurl="file://$PROJECT_DIR$/ddms/app/ddms.iml" filepath="$PROJECT_DIR$/ddms/app/ddms.iml" />
@@ -21,4 +22,3 @@
     </modules>
   </component>
 </project>
-
