@@ -77,15 +77,15 @@ public class SdkManagerUpgradeTest extends SdkManagerTestCase {
                 "[]",  // there are no direct downloads till we try to install.
                 Arrays.toString(cache.getDirectHits()));
         assertEquals(
-                "[<https://dl-ssl.google.com/android/repository/addons_list-1.xml : 1>, " +
-                 "<https://dl-ssl.google.com/android/repository/addons_list-2.xml : 1>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-10.xml : 2>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-5.xml : 2>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-6.xml : 2>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-7.xml : 2>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-8.xml : 2>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-9.xml : 2>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository.xml : 2>]",
+                "[<https://dl.google.com/android/repository/addons_list-1.xml : 1>, " +
+                 "<https://dl.google.com/android/repository/addons_list-2.xml : 1>, " +
+                 "<https://dl.google.com/android/repository/repository-10.xml : 2>, " +
+                 "<https://dl.google.com/android/repository/repository-5.xml : 2>, " +
+                 "<https://dl.google.com/android/repository/repository-6.xml : 2>, " +
+                 "<https://dl.google.com/android/repository/repository-7.xml : 2>, " +
+                 "<https://dl.google.com/android/repository/repository-8.xml : 2>, " +
+                 "<https://dl.google.com/android/repository/repository-9.xml : 2>, " +
+                 "<https://dl.google.com/android/repository/repository.xml : 2>]",
                 Arrays.toString(cache.getCachedHits()));
 
 
@@ -118,13 +118,13 @@ public class SdkManagerUpgradeTest extends SdkManagerTestCase {
                 "[]",  // there are no direct downloads till we try to install.
                 Arrays.toString(cache.getDirectHits()));
         assertEquals(
-                "[<https://dl-ssl.google.com/android/repository/repository-10.xml : 1>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-5.xml : 1>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-6.xml : 1>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-7.xml : 1>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-8.xml : 1>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository-9.xml : 1>, " +
-                 "<https://dl-ssl.google.com/android/repository/repository.xml : 1>]",
+                "[<https://dl.google.com/android/repository/repository-10.xml : 1>, " +
+                 "<https://dl.google.com/android/repository/repository-5.xml : 1>, " +
+                 "<https://dl.google.com/android/repository/repository-6.xml : 1>, " +
+                 "<https://dl.google.com/android/repository/repository-7.xml : 1>, " +
+                 "<https://dl.google.com/android/repository/repository-8.xml : 1>, " +
+                 "<https://dl.google.com/android/repository/repository-9.xml : 1>, " +
+                 "<https://dl.google.com/android/repository/repository.xml : 1>]",
                 Arrays.toString(cache.getCachedHits()));
 
 
@@ -158,13 +158,13 @@ public class SdkManagerUpgradeTest extends SdkManagerTestCase {
                 "[]",  // there are no direct downloads till we try to install.
                 Arrays.toString(cache.getDirectHits()));
         assertEquals(
-               "[<https://dl-ssl.google.com/android/repository/repository-10.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository-5.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository-6.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository-7.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository-8.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository-9.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository.xml : 1>]",
+               "[<https://dl.google.com/android/repository/repository-10.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-5.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-6.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-7.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-8.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-9.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository.xml : 1>]",
                 Arrays.toString(cache.getCachedHits()));
 
 
@@ -198,13 +198,13 @@ public class SdkManagerUpgradeTest extends SdkManagerTestCase {
                 "[]",  // there are no direct downloads till we try to install.
                 Arrays.toString(cache.getDirectHits()));
         assertEquals(
-               "[<https://dl-ssl.google.com/android/repository/repository-10.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository-5.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository-6.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository-7.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository-8.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository-9.xml : 1>, " +
-                "<https://dl-ssl.google.com/android/repository/repository.xml : 1>]",
+               "[<https://dl.google.com/android/repository/repository-10.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-5.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-6.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-7.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-8.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-9.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository.xml : 1>]",
                 Arrays.toString(cache.getCachedHits()));
     }
 
