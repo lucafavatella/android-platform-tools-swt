@@ -971,7 +971,7 @@ public final class AvdSelector {
         final Display display = mTable.getDisplay();
 
         // check if the AVD is running
-        if (avdInfo.isRunning()) {
+        if (mAvdManager.isAvdRunning(avdInfo)) {
             display.asyncExec(new Runnable() {
                 @Override
                 public void run() {
