@@ -10,9 +10,9 @@
       <module fileurl="file://$PROJECT_DIR$/../base/device_validator/dvlib/dvlib.iml" filepath="$PROJECT_DIR$/../base/device_validator/dvlib/dvlib.iml" />
       <module fileurl="file://$PROJECT_DIR$/hierarchyviewer2/app/hierarchyviewer2.iml" filepath="$PROJECT_DIR$/hierarchyviewer2/app/hierarchyviewer2.iml" />
       <module fileurl="file://$PROJECT_DIR$/hierarchyviewer2/hierarchyviewer2lib/hierarchyviewer2lib.iml" filepath="$PROJECT_DIR$/hierarchyviewer2/hierarchyviewer2lib/hierarchyviewer2lib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../base/layoutlib-api/layoutlib-api.iml" filepath="$PROJECT_DIR$/../base/layoutlib-api/layoutlib-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../base/layoutlib-api/layoutlib-api-base.iml" filepath="$PROJECT_DIR$/../base/layoutlib-api/layoutlib-api-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/../base/perflib/perflib.iml" filepath="$PROJECT_DIR$/../base/perflib/perflib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../base/sdklib/sdklib.iml" filepath="$PROJECT_DIR$/../base/sdklib/sdklib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../base/sdklib/sdklib-base.iml" filepath="$PROJECT_DIR$/../base/sdklib/sdklib-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/sdkmanager/app/sdkmanager.iml" filepath="$PROJECT_DIR$/sdkmanager/app/sdkmanager.iml" />
       <module fileurl="file://$PROJECT_DIR$/sdkstats/sdkstats.iml" filepath="$PROJECT_DIR$/sdkstats/sdkstats.iml" />
       <module fileurl="file://$PROJECT_DIR$/sdkmanager/sdkuilib/sdkuilib.iml" filepath="$PROJECT_DIR$/sdkmanager/sdkuilib/sdkuilib.iml" />
