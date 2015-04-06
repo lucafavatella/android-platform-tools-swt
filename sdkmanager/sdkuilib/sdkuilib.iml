@@ -10,7 +10,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="common" />
     <orderEntry type="module" module-name="swtmenubar" />
-    <orderEntry type="module" module-name="sdklib" />
+    <orderEntry type="module" module-name="sdklib-base" />
     <orderEntry type="library" name="swt" level="project" />
     <orderEntry type="library" name="org-eclipse-jface-3.6.2" level="project" />
     <orderEntry type="library" name="org-eclipse-core-commands-3.6.0" level="project" />
