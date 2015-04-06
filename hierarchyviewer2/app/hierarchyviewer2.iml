@@ -11,7 +11,7 @@
     <orderEntry type="module" module-name="ddmuilib" />
     <orderEntry type="module" module-name="hierarchyviewer2lib" />
     <orderEntry type="module" module-name="common" />
-    <orderEntry type="module" module-name="sdklib" />
+    <orderEntry type="module" module-name="sdklib-base" />
     <orderEntry type="module" module-name="swtmenubar" />
   </component>
 </module>
