@@ -25,7 +25,7 @@ import com.android.io.FileWrapper;
 import com.android.prefs.AndroidLocation;
 import com.android.prefs.AndroidLocation.AndroidLocationException;
 import com.android.sdklib.IAndroidTarget;
-import com.android.sdklib.IAndroidTarget.IOptionalLibrary;
+import com.android.sdklib.IAndroidTarget.OptionalLibrary;
 import com.android.sdklib.ISystemImage;
 import com.android.sdklib.SdkManager;
 import com.android.sdklib.SystemImage;
@@ -58,6 +58,7 @@ import com.android.utils.ILogger;
 import com.android.utils.IReaderLogger;
 import com.android.utils.Pair;
 import com.android.xml.AndroidXPathFactory;
+import com.google.common.collect.ImmutableList;
 
 import org.eclipse.swt.widgets.Display;
 import org.xml.sax.InputSource;
@@ -993,12 +994,12 @@ public class Main {
                         target.getVersionName(), target.getVersion().getApiString());
 
                 // display the optional libraries.
-                IOptionalLibrary[] libraries = target.getOptionalLibraries();
-                if (libraries != null) {
+                List<OptionalLibrary> libraries = target.getAdditionalLibraries();
+                if (!libraries.isEmpty()) {
                     mSdkLog.info("     Libraries:\n");
-                    for (IOptionalLibrary library : libraries) {
+                    for (OptionalLibrary library : libraries) {
                         mSdkLog.info("      * %1$s (%2$s)\n",
-                                library.getName(), library.getJarName());
+                                library.getName(), library.getJar().getName());
                         mSdkLog.info("          %1$s\n", library.getDescription());
                     }
                 }
