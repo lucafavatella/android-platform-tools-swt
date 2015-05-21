@@ -982,7 +982,10 @@ public class PackagesDiffLogicTest extends TestCase {
     public void testToolsPreviewsDisabled() {
         // Test: No local tools installed. The remote server has both tools and platforms
         // in release and RC versions. However the settings "enable previews" is disabled
-        // (which is the default) so the previews are not actually loaded from the server.
+        // so the previews are not actually loaded from the server.
+
+        // Disable previews in the settings
+        u.overrideSetting(ISettingsPage.KEY_ENABLE_PREVIEWS, false);
 
         SdkSource src1 = new SdkRepoSource("http://1.example.com/url1", "repo1");
 
