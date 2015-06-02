@@ -80,6 +80,7 @@ public class SdkManagerUpgradeTest extends SdkManagerTestCase {
                 "[<https://dl.google.com/android/repository/addons_list-1.xml : 1>, " +
                  "<https://dl.google.com/android/repository/addons_list-2.xml : 1>, " +
                  "<https://dl.google.com/android/repository/repository-10.xml : 2>, " +
+                 "<https://dl.google.com/android/repository/repository-11.xml : 2>, " +
                  "<https://dl.google.com/android/repository/repository-5.xml : 2>, " +
                  "<https://dl.google.com/android/repository/repository-6.xml : 2>, " +
                  "<https://dl.google.com/android/repository/repository-7.xml : 2>, " +
@@ -119,6 +120,7 @@ public class SdkManagerUpgradeTest extends SdkManagerTestCase {
                 Arrays.toString(cache.getDirectHits()));
         assertEquals(
                 "[<https://dl.google.com/android/repository/repository-10.xml : 1>, " +
+                 "<https://dl.google.com/android/repository/repository-11.xml : 1>, " +
                  "<https://dl.google.com/android/repository/repository-5.xml : 1>, " +
                  "<https://dl.google.com/android/repository/repository-6.xml : 1>, " +
                  "<https://dl.google.com/android/repository/repository-7.xml : 1>, " +
@@ -159,6 +161,7 @@ public class SdkManagerUpgradeTest extends SdkManagerTestCase {
                 Arrays.toString(cache.getDirectHits()));
         assertEquals(
                "[<https://dl.google.com/android/repository/repository-10.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-11.xml : 1>, " +
                 "<https://dl.google.com/android/repository/repository-5.xml : 1>, " +
                 "<https://dl.google.com/android/repository/repository-6.xml : 1>, " +
                 "<https://dl.google.com/android/repository/repository-7.xml : 1>, " +
@@ -199,6 +202,7 @@ public class SdkManagerUpgradeTest extends SdkManagerTestCase {
                 Arrays.toString(cache.getDirectHits()));
         assertEquals(
                "[<https://dl.google.com/android/repository/repository-10.xml : 1>, " +
+                "<https://dl.google.com/android/repository/repository-11.xml : 1>, " +
                 "<https://dl.google.com/android/repository/repository-5.xml : 1>, " +
                 "<https://dl.google.com/android/repository/repository-6.xml : 1>, " +
                 "<https://dl.google.com/android/repository/repository-7.xml : 1>, " +
