@@ -53,22 +53,22 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 LocationType.IN_IMAGES_SUBFOLDER,
                 SystemImage.DEFAULT_TAG,
                 SdkConstants.ABI_ARMEABI_V7A,
-                FileOp.EMPTY_FILE_ARRAY));
+                FileOp.EMPTY_FILE_ARRAY), null);
         makeSystemImageFolder(new SystemImage(sdkMan, mTarget,
                 LocationType.IN_IMAGES_SUBFOLDER,
                 SystemImage.DEFAULT_TAG,
                 SdkConstants.ABI_ARM64_V8A,
-                FileOp.EMPTY_FILE_ARRAY));
+                FileOp.EMPTY_FILE_ARRAY), null);
         makeSystemImageFolder(new SystemImage(sdkMan, mTarget,
                 LocationType.IN_IMAGES_SUBFOLDER,
                 SystemImage.DEFAULT_TAG,
                 SdkConstants.ABI_INTEL_ATOM,
-                FileOp.EMPTY_FILE_ARRAY));
+                FileOp.EMPTY_FILE_ARRAY), null);
         makeSystemImageFolder(new SystemImage(sdkMan, mTarget,
                 LocationType.IN_IMAGES_SUBFOLDER,
                 SystemImage.DEFAULT_TAG,
                 SdkConstants.ABI_INTEL_ATOM64,
-                FileOp.EMPTY_FILE_ARRAY));
+                FileOp.EMPTY_FILE_ARRAY), null);
 
         sdkMan.reloadSdk(getLog());
     }
@@ -80,35 +80,36 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "Title: Create new Android Virtual Device (AVD)\n" +
                 "   AVD Name: \n" +
                 "   Device: [-1]\n" +
-                "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
+                "       - Nexus 9 (8.86\", 2048 × 1536: xhdpi)\n" +
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
-                "       - Nexus 9 (8.86\", 2048 × 1536: xhdpi)\n" +
+                "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
                 "       - Nexus 7 (7.02\", 1200 × 1920: xhdpi)\n" +
                 "       - Galaxy Nexus (4.65\", 720 × 1280: xhdpi)\n" +
                 "       - Nexus S (4.0\", 480 × 800: hdpi)\n" +
                 "       - Nexus One (3.7\", 480 × 800: hdpi)\n" +
-                "       - Android TV (720p) (1280 × 720: tvdpi)\n" +
-                "       - Android TV (1080p) (1920 × 1080: xhdpi)\n" +
-                "       - Android Wear Round (320 × 320: hdpi)\n" +
-                "       - Android Wear Square (280 × 280: hdpi)\n" +
-                "       - 10.1\" WXGA (Tablet) (1280 × 800: mdpi)\n" +
-                "       - 7\" WSVGA (Tablet) (1024 × 600: mdpi)\n" +
-                "       - 5.4\" FWVGA (480 × 854: mdpi)\n" +
-                "       - 5.1\" WVGA (480 × 800: mdpi)\n" +
-                "       - 4.7\" WXGA (1280 × 720: xhdpi)\n" +
-                "       - 4.65\" 720p (Galaxy Nexus) (720 × 1280: xhdpi)\n" +
-                "       - 4\" WVGA (Nexus S) (480 × 800: hdpi)\n" +
-                "       - 3.7\" FWVGA slider (480 × 854: hdpi)\n" +
                 "       - 3.7\" WVGA (Nexus One) (480 × 800: hdpi)\n" +
-                "       - 3.4\" WQVGA (240 × 432: ldpi)\n" +
-                "       - 3.3\" WQVGA (240 × 400: ldpi)\n" +
-                "       - 3.2\" QVGA (ADP2) (320 × 480: mdpi)\n" +
+                "       - Android Wear Round Chin (320 × 290: tvdpi)\n" +
+                "       - 4\" WVGA (Nexus S) (480 × 800: hdpi)\n" +
                 "       - 3.2\" HVGA slider (ADP1) (320 × 480: mdpi)\n" +
+                "       - Android TV (1080p) (1920 × 1080: xhdpi)\n" +
+                "       - 10.1\" WXGA (Tablet) (1280 × 800: mdpi)\n" +
+                "       - 4.7\" WXGA (1280 × 720: xhdpi)\n" +
+                "       - 5.4\" FWVGA (480 × 854: mdpi)\n" +
+                "       - 4.65\" 720p (Galaxy Nexus) (720 × 1280: xhdpi)\n" +
+                "       - 3.7\" FWVGA slider (480 × 854: hdpi)\n" +
+                "       - Android Wear Round (320 × 320: hdpi)\n" +
+                "       - 3.2\" QVGA (ADP2) (320 × 480: mdpi)\n" +
                 "       - 2.7\" QVGA slider (240 × 320: ldpi)\n" +
+                "       - 3.4\" WQVGA (240 × 432: ldpi)\n" +
+                "       - 7\" WSVGA (Tablet) (1024 × 600: mdpi)\n" +
+                "       - 3.3\" WQVGA (240 × 400: ldpi)\n" +
+                "       - Android Wear Square (280 × 280: hdpi)\n" +
+                "       - 5.1\" WVGA (480 × 800: mdpi)\n" +
                 "       - 2.7\" QVGA (240 × 320: ldpi)\n" +
+                "       - Android TV (720p) (1280 × 720: tvdpi)\n" +
                 "   Target: [-1]\n" +
                 "       - Android 0.0 - API Level 0\n" +
                 "   CPU/ABI: [-1]\n" +
@@ -159,35 +160,36 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "Title: Create new Android Virtual Device (AVD)\n" +
                 "   AVD Name: \n" +
                 "   Device: [-1]\n" +
-                "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
+                "       - Nexus 9 (8.86\", 2048 × 1536: xhdpi)\n" +
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
-                "       - Nexus 9 (8.86\", 2048 × 1536: xhdpi)\n" +
+                "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
                 "       - Nexus 7 (7.02\", 1200 × 1920: xhdpi)\n" +
                 "       - Galaxy Nexus (4.65\", 720 × 1280: xhdpi)\n" +
                 "       - Nexus S (4.0\", 480 × 800: hdpi)\n" +
                 "       - Nexus One (3.7\", 480 × 800: hdpi)\n" +
-                "       - Android TV (720p) (1280 × 720: tvdpi)\n" +
-                "       - Android TV (1080p) (1920 × 1080: xhdpi)\n" +
-                "       - Android Wear Round (320 × 320: hdpi)\n" +
-                "       - Android Wear Square (280 × 280: hdpi)\n" +
-                "       - 10.1\" WXGA (Tablet) (1280 × 800: mdpi)\n" +
-                "       - 7\" WSVGA (Tablet) (1024 × 600: mdpi)\n" +
-                "       - 5.4\" FWVGA (480 × 854: mdpi)\n" +
-                "       - 5.1\" WVGA (480 × 800: mdpi)\n" +
-                "       - 4.7\" WXGA (1280 × 720: xhdpi)\n" +
-                "       - 4.65\" 720p (Galaxy Nexus) (720 × 1280: xhdpi)\n" +
-                "       - 4\" WVGA (Nexus S) (480 × 800: hdpi)\n" +
-                "       - 3.7\" FWVGA slider (480 × 854: hdpi)\n" +
                 "       - 3.7\" WVGA (Nexus One) (480 × 800: hdpi)\n" +
-                "       - 3.4\" WQVGA (240 × 432: ldpi)\n" +
-                "       - 3.3\" WQVGA (240 × 400: ldpi)\n" +
-                "       - 3.2\" QVGA (ADP2) (320 × 480: mdpi)\n" +
+                "       - Android Wear Round Chin (320 × 290: tvdpi)\n" +
+                "       - 4\" WVGA (Nexus S) (480 × 800: hdpi)\n" +
                 "       - 3.2\" HVGA slider (ADP1) (320 × 480: mdpi)\n" +
+                "       - Android TV (1080p) (1920 × 1080: xhdpi)\n" +
+                "       - 10.1\" WXGA (Tablet) (1280 × 800: mdpi)\n" +
+                "       - 4.7\" WXGA (1280 × 720: xhdpi)\n" +
+                "       - 5.4\" FWVGA (480 × 854: mdpi)\n" +
+                "       - 4.65\" 720p (Galaxy Nexus) (720 × 1280: xhdpi)\n" +
+                "       - 3.7\" FWVGA slider (480 × 854: hdpi)\n" +
+                "       - Android Wear Round (320 × 320: hdpi)\n" +
+                "       - 3.2\" QVGA (ADP2) (320 × 480: mdpi)\n" +
                 "       - 2.7\" QVGA slider (240 × 320: ldpi)\n" +
+                "       - 3.4\" WQVGA (240 × 432: ldpi)\n" +
+                "       - 7\" WSVGA (Tablet) (1024 × 600: mdpi)\n" +
+                "       - 3.3\" WQVGA (240 × 400: ldpi)\n" +
+                "       - Android Wear Square (280 × 280: hdpi)\n" +
+                "       - 5.1\" WVGA (480 × 800: mdpi)\n" +
                 "       - 2.7\" QVGA (240 × 320: ldpi)\n" +
+                "       - Android TV (720p) (1280 × 720: tvdpi)\n" +
                 "   Target: [-1]\n" +
                 "       - Android 0.0 - API Level 0\n" +
                 "   CPU/ABI: [-1]\n" +
@@ -222,35 +224,36 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "Title: Create new Android Virtual Device (AVD)\n" +
                 "   AVD Name: \n" +
                 "   Device: [-1]\n" +
-                "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
+                "       - Nexus 9 (8.86\", 2048 × 1536: xhdpi)\n" +
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
-                "       - Nexus 9 (8.86\", 2048 × 1536: xhdpi)\n" +
+                "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
                 "       - Nexus 7 (7.02\", 1200 × 1920: xhdpi)\n" +
                 "       - Galaxy Nexus (4.65\", 720 × 1280: xhdpi)\n" +
                 "       - Nexus S (4.0\", 480 × 800: hdpi)\n" +
                 "       - Nexus One (3.7\", 480 × 800: hdpi)\n" +
-                "       - Android TV (720p) (1280 × 720: tvdpi)\n" +
-                "       - Android TV (1080p) (1920 × 1080: xhdpi)\n" +
-                "       - Android Wear Round (320 × 320: hdpi)\n" +
-                "       - Android Wear Square (280 × 280: hdpi)\n" +
-                "       - 10.1\" WXGA (Tablet) (1280 × 800: mdpi)\n" +
-                "       - 7\" WSVGA (Tablet) (1024 × 600: mdpi)\n" +
-                "       - 5.4\" FWVGA (480 × 854: mdpi)\n" +
-                "       - 5.1\" WVGA (480 × 800: mdpi)\n" +
-                "       - 4.7\" WXGA (1280 × 720: xhdpi)\n" +
-                "       - 4.65\" 720p (Galaxy Nexus) (720 × 1280: xhdpi)\n" +
-                "       - 4\" WVGA (Nexus S) (480 × 800: hdpi)\n" +
-                "       - 3.7\" FWVGA slider (480 × 854: hdpi)\n" +
                 "       - 3.7\" WVGA (Nexus One) (480 × 800: hdpi)\n" +
-                "       - 3.4\" WQVGA (240 × 432: ldpi)\n" +
-                "       - 3.3\" WQVGA (240 × 400: ldpi)\n" +
-                "       - 3.2\" QVGA (ADP2) (320 × 480: mdpi)\n" +
+                "       - Android Wear Round Chin (320 × 290: tvdpi)\n" +
+                "       - 4\" WVGA (Nexus S) (480 × 800: hdpi)\n" +
                 "       - 3.2\" HVGA slider (ADP1) (320 × 480: mdpi)\n" +
+                "       - Android TV (1080p) (1920 × 1080: xhdpi)\n" +
+                "       - 10.1\" WXGA (Tablet) (1280 × 800: mdpi)\n" +
+                "       - 4.7\" WXGA (1280 × 720: xhdpi)\n" +
+                "       - 5.4\" FWVGA (480 × 854: mdpi)\n" +
+                "       - 4.65\" 720p (Galaxy Nexus) (720 × 1280: xhdpi)\n" +
+                "       - 3.7\" FWVGA slider (480 × 854: hdpi)\n" +
+                "       - Android Wear Round (320 × 320: hdpi)\n" +
+                "       - 3.2\" QVGA (ADP2) (320 × 480: mdpi)\n" +
                 "       - 2.7\" QVGA slider (240 × 320: ldpi)\n" +
+                "       - 3.4\" WQVGA (240 × 432: ldpi)\n" +
+                "       - 7\" WSVGA (Tablet) (1024 × 600: mdpi)\n" +
+                "       - 3.3\" WQVGA (240 × 400: ldpi)\n" +
+                "       - Android Wear Square (280 × 280: hdpi)\n" +
+                "       - 5.1\" WVGA (480 × 800: mdpi)\n" +
                 "       - 2.7\" QVGA (240 × 320: ldpi)\n" +
+                "       - Android TV (720p) (1280 × 720: tvdpi)\n" +
                 "   Target: [-1]\n" +
                 "       - Android 0.0 - API Level 0\n" +
                 "   CPU/ABI: [-1]\n" +
@@ -284,9 +287,9 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "@@ -2 +2\n" +
                 "-    AVD Name: \n" +
                 "+    AVD Name: the_avd_name\n" +
-                "@@ -53 +53\n" +
+                "@@ -54 +54\n" +
                 "-    Status: AVD Name cannot be empty\n" +
-                "@@ -54 +53\n" +
+                "@@ -55 +54\n" +
                 "+    Status: No device selected\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -303,7 +306,7 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "@@ -12 +12\n" +
                 "-        - Nexus S (4.0\", 480 × 800: hdpi)\n" +
                 "+       ** Nexus S (4.0\", 480 × 800: hdpi)\n" +
-                "@@ -40 +40\n" +
+                "@@ -41 +41\n" +
                 "- -- Front Cam: [-1]\n" +
                 "- -- Back  Cam: [-1]\n" +
                 "-    RAM: \n" +
@@ -312,9 +315,9 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "+    Back  Cam: [-1]\n" +
                 "+    RAM: 343\n" +
                 "+    VM : 32\n" +
-                "@@ -53 +53\n" +
+                "@@ -54 +54\n" +
                 "-    Status: No device selected\n" +
-                "@@ -54 +53\n" +
+                "@@ -55 +54\n" +
                 "+    Status: No target selected\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -325,21 +328,21 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         last = r;
         r = v.renderDialog();
         assertEquals(
-                "@@ -33 +33\n" +
+                "@@ -34 +34\n" +
                 "-    Target: [-1]\n" +
                 "-        - Android 0.0 - API Level 0\n" +
                 "+    Target: [0]\n" +
                 "+       ** Android 0.0 - API Level 0\n" +
-                "@@ -36 +36\n" +
+                "@@ -37 +37\n" +
                 "+        - ARM (arm64-v8a)\n" +
                 "+        - ARM (armeabi-v7a)\n" +
                 "+        - Intel Atom (x86)\n" +
                 "+        - Intel Atom (x86_64)\n" +
-                "@@ -40 +44\n" +
+                "@@ -41 +45\n" +
                 "+        - HVGA\n" +
-                "@@ -53 +58\n" +
+                "@@ -54 +59\n" +
                 "-    Status: No target selected\n" +
-                "@@ -54 +58\n" +
+                "@@ -55 +59\n" +
                 "+    Status: No CPU/ABI system image selected\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -350,14 +353,14 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         last = r;
         r = v.renderDialog();
         assertEquals(
-                "@@ -35 +35\n" +
+                "@@ -36 +36\n" +
                 "-    CPU/ABI: [-1]\n" +
                 "-        - ARM (arm64-v8a)\n" +
                 "+    CPU/ABI: [0]\n" +
                 "+       ** ARM (arm64-v8a)\n" +
-                "@@ -58 +58\n" +
+                "@@ -59 +59\n" +
                 "-    Status: No CPU/ABI system image selected\n" +
-                "@@ -59 +58\n" +
+                "@@ -60 +59\n" +
                 "+    Status: No skin selected\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -368,14 +371,14 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         last = r;
         r = v.renderDialog();
         assertEquals(
-                "@@ -41 +41\n" +
+                "@@ -42 +42\n" +
                 "-    Skin: [-1]\n" +
                 "-        - Skin with dynamic hardware controls\n" +
                 "+    Skin: [0]\n" +
                 "+       ** Skin with dynamic hardware controls\n" +
-                "@@ -58 +58\n" +
+                "@@ -59 +59\n" +
                 "-    Status: No skin selected\n" +
-                "@@ -59 +58\n" +
+                "@@ -60 +59\n" +
                 "+    Status: Invalid Data partition size.\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -387,14 +390,14 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         last = r;
         r = v.renderDialog();
         assertEquals(
-                "@@ -49 +49\n" +
+                "@@ -50 +50\n" +
                 "-    Data Size: \n" +
                 "-    Data Unit: [-1]\n" +
                 "+    Data Size: 200\n" +
                 "+    Data Unit: [0]\n" +
-                "@@ -58 +58\n" +
+                "@@ -59 +59\n" +
                 "-    Status: Invalid Data partition size.\n" +
-                "@@ -59 +58\n" +
+                "@@ -60 +59\n" +
                 "+    Status: SD Card path isn't valid.\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -410,17 +413,17 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         last = r;
         r = v.renderDialog();
         assertEquals(
-                "@@ -51 +51\n" +
+                "@@ -52 +52\n" +
                 "-    [ ] SD by Size\n" +
                 "-    SD Size: \n" +
                 "-    SD Unit: [-1]\n" +
                 "+    [x] SD by Size\n" +
                 "+    SD Size: 16\n" +
                 "+    SD Unit: [1]\n" +
-                "@@ -57 +57\n" +
+                "@@ -58 +58\n" +
                 "-    Icon: reject_icon16.png\n" +
                 "-    Status: SD Card path isn't valid.\n" +
-                "@@ -59 +57\n" +
+                "@@ -60 +58\n" +
                 "+    Icon: null\n" +
                 "+    Status:  \n" +
                 "+ \n",
@@ -432,35 +435,36 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "Title: Create new Android Virtual Device (AVD)\n" +
                 "   AVD Name: the_avd_name\n" +
                 "   Device: [8]\n" +
-                "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
+                "       - Nexus 9 (8.86\", 2048 × 1536: xhdpi)\n" +
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
-                "       - Nexus 9 (8.86\", 2048 × 1536: xhdpi)\n" +
+                "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
                 "       - Nexus 7 (7.02\", 1200 × 1920: xhdpi)\n" +
                 "       - Galaxy Nexus (4.65\", 720 × 1280: xhdpi)\n" +
                 "      ** Nexus S (4.0\", 480 × 800: hdpi)\n" +
                 "       - Nexus One (3.7\", 480 × 800: hdpi)\n" +
-                "       - Android TV (720p) (1280 × 720: tvdpi)\n" +
-                "       - Android TV (1080p) (1920 × 1080: xhdpi)\n" +
-                "       - Android Wear Round (320 × 320: hdpi)\n" +
-                "       - Android Wear Square (280 × 280: hdpi)\n" +
-                "       - 10.1\" WXGA (Tablet) (1280 × 800: mdpi)\n" +
-                "       - 7\" WSVGA (Tablet) (1024 × 600: mdpi)\n" +
-                "       - 5.4\" FWVGA (480 × 854: mdpi)\n" +
-                "       - 5.1\" WVGA (480 × 800: mdpi)\n" +
-                "       - 4.7\" WXGA (1280 × 720: xhdpi)\n" +
-                "       - 4.65\" 720p (Galaxy Nexus) (720 × 1280: xhdpi)\n" +
-                "       - 4\" WVGA (Nexus S) (480 × 800: hdpi)\n" +
-                "       - 3.7\" FWVGA slider (480 × 854: hdpi)\n" +
                 "       - 3.7\" WVGA (Nexus One) (480 × 800: hdpi)\n" +
-                "       - 3.4\" WQVGA (240 × 432: ldpi)\n" +
-                "       - 3.3\" WQVGA (240 × 400: ldpi)\n" +
-                "       - 3.2\" QVGA (ADP2) (320 × 480: mdpi)\n" +
+                "       - Android Wear Round Chin (320 × 290: tvdpi)\n" +
+                "       - 4\" WVGA (Nexus S) (480 × 800: hdpi)\n" +
                 "       - 3.2\" HVGA slider (ADP1) (320 × 480: mdpi)\n" +
+                "       - Android TV (1080p) (1920 × 1080: xhdpi)\n" +
+                "       - 10.1\" WXGA (Tablet) (1280 × 800: mdpi)\n" +
+                "       - 4.7\" WXGA (1280 × 720: xhdpi)\n" +
+                "       - 5.4\" FWVGA (480 × 854: mdpi)\n" +
+                "       - 4.65\" 720p (Galaxy Nexus) (720 × 1280: xhdpi)\n" +
+                "       - 3.7\" FWVGA slider (480 × 854: hdpi)\n" +
+                "       - Android Wear Round (320 × 320: hdpi)\n" +
+                "       - 3.2\" QVGA (ADP2) (320 × 480: mdpi)\n" +
                 "       - 2.7\" QVGA slider (240 × 320: ldpi)\n" +
+                "       - 3.4\" WQVGA (240 × 432: ldpi)\n" +
+                "       - 7\" WSVGA (Tablet) (1024 × 600: mdpi)\n" +
+                "       - 3.3\" WQVGA (240 × 400: ldpi)\n" +
+                "       - Android Wear Square (280 × 280: hdpi)\n" +
+                "       - 5.1\" WVGA (480 × 800: mdpi)\n" +
                 "       - 2.7\" QVGA (240 × 320: ldpi)\n" +
+                "       - Android TV (720p) (1280 × 720: tvdpi)\n" +
                 "   Target: [0]\n" +
                 "      ** Android 0.0 - API Level 0\n" +
                 "   CPU/ABI: [0]\n" +
