@@ -93,9 +93,9 @@ public class SdkManagerTest2 extends SdkManagerTestCase {
                 "P tv_1080p\n" +
                 "P tv_720p\n" +
                 "P wear_round\n" +
+                "P wear_round_chin_320_290\n" +
                 "P wear_square\n" +
                 "P Galaxy Nexus\n" +
-                "P MockDevice-tag-1\n" +
                 "P MockDevice-tag-1\n" +
                 "P Nexus 10\n" +
                 "P Nexus 4\n" +
@@ -141,18 +141,19 @@ public class SdkManagerTest2 extends SdkManagerTestCase {
                 "P     OEM : Google\n" +
                 "P     Tag : android-wear\n" +
                 "P ---------\n" +
-                "P id: 3 or \"wear_square\"\n" +
+                "P id: 3 or \"wear_round_chin_320_290\"\n" +
+                "P     Name: Android Wear Round Chin\n" +
+                "P     OEM : Google\n" +
+                "P     Tag : android-wear\n" +
+                "P ---------\n" +
+                "P id: 4 or \"wear_square\"\n" +
                 "P     Name: Android Wear Square\n" +
                 "P     OEM : Google\n" +
                 "P     Tag : android-wear\n" +
                 "P ---------\n" +
-                "P id: 4 or \"Galaxy Nexus\"\n" +
+                "P id: 5 or \"Galaxy Nexus\"\n" +
                 "P     Name: Galaxy Nexus\n" +
                 "P     OEM : Google\n" +
-                "P ---------\n" +
-                "P id: 5 or \"MockDevice-tag-1\"\n" +
-                "P     Name: Mock Tag 1 Device Name\n" +
-                "P     OEM : Mock Tag 1 OEM\n" +
                 "P ---------\n" +
                 "P id: 6 or \"MockDevice-tag-1\"\n" +
                 "P     Name: Mock Tag 1 Device Name\n" +
