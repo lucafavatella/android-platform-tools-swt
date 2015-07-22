@@ -29,8 +29,10 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -54,6 +56,11 @@ public class NativeSymbolResolverTask implements IRunnableWithProgress {
     private static final String ADDR2LINE;
     private static final String ADDR2LINE64;
     private static final String DEFAULT_SYMBOLS_FOLDER;
+
+    private static final int ELF_CLASS32 = 1;
+    private static final int ELF_CLASS64 = 2;
+    private static final int ELF_DATA2LSB = 1;
+    private static final int ELF_PT_LOAD = 1;
 
     static {
         String addr2lineEnv = System.getenv("ANDROID_ADDR2LINE");
@@ -174,6 +181,120 @@ public class NativeSymbolResolverTask implements IRunnableWithProgress {
         }
     }
 
+    private long unsigned(byte value, long shift) {
+        return ((long) value & 0xFF) << shift;
+    }
+
+    private short elfGetHalfWord(RandomAccessFile file, long offset) throws IOException {
+        byte[] buf = new byte[2];
+        file.seek(offset);
+        file.readFully(buf, 0, 2);
+        return (short) (unsigned(buf[0], 0) | unsigned(buf[1], 8));
+    }
+
+    private int elfGetWord(RandomAccessFile file, long offset) throws IOException {
+        byte[] buf = new byte[4];
+        file.seek(offset);
+        file.readFully(buf, 0, 4);
+        return (int) (unsigned(buf[0], 0) | unsigned(buf[1], 8) |
+                unsigned(buf[2], 16) | unsigned(buf[3], 24));
+    }
+
+    private long elfGetDoubleWord(RandomAccessFile file, long offset) throws IOException {
+        byte[] buf = new byte[8];
+        file.seek(offset);
+        file.readFully(buf, 0, 8);
+        return unsigned(buf[0], 0) | unsigned(buf[1], 8) |
+                unsigned(buf[2], 16) | unsigned(buf[3], 24) |
+                unsigned(buf[4], 32) | unsigned(buf[5], 40) |
+                unsigned(buf[6], 48) | unsigned(buf[7], 56);
+    }
+
+    private long getLoadBase(String libPath) {
+        RandomAccessFile file;
+        try {
+            file = new RandomAccessFile(libPath, "r");
+        } catch (FileNotFoundException e) {
+            return 0;
+        }
+        byte[] buffer = new byte[8];
+        try {
+            file.readFully(buffer, 0, 6);
+        } catch (IOException e) {
+            return 0;
+        }
+        if (buffer[0] != 0x7f || buffer[1] != 'E' || buffer[2] != 'L' ||
+                buffer[3] != 'F' || buffer[5] != ELF_DATA2LSB) {
+            return 0;
+        }
+
+        boolean elf32;
+        long elfPhdrSize;
+        long ePhnumOffset;
+        long ePhoffOffset;
+        long pTypeOffset;
+        long pOffsetOffset;
+        long pVaddrOffset;
+        if (buffer[4] == ELF_CLASS32) {
+            // ELFCLASS32
+            elf32 = true;
+            elfPhdrSize = 32;
+
+            ePhnumOffset = 44;
+            ePhoffOffset = 28;
+            pTypeOffset = 0;
+            pOffsetOffset = 4;
+            pVaddrOffset = 8;
+        } else if (buffer[4] == ELF_CLASS64) {
+            // ELFCLASS64
+            elf32 = false;
+            elfPhdrSize = 56;
+
+            ePhnumOffset = 56;
+            ePhoffOffset = 32;
+            pTypeOffset = 0;
+            pOffsetOffset = 8;
+            pVaddrOffset = 16;
+        } else {
+            // Unknown class type.
+            return 0;
+        }
+
+        try {
+            int ePhnum = elfGetHalfWord(file, ePhnumOffset);
+            long offset;
+            if (elf32) {
+                offset = elfGetWord(file, ePhoffOffset);
+            } else {
+                offset = elfGetDoubleWord(file, ePhoffOffset);
+            }
+            for (int i = 0; i < ePhnum; i++) {
+                int pType = elfGetWord(file, offset + pTypeOffset);
+
+                long pOffset;
+                if (elf32) {
+                    pOffset = elfGetWord(file, offset + pOffsetOffset);
+                } else {
+                    pOffset = elfGetDoubleWord(file, offset + pOffsetOffset);
+                }
+                // Assume all offsets are zero.
+                if (pType == ELF_PT_LOAD && pOffset == 0) {
+                    long pVaddr;
+                    if (elf32) {
+                        pVaddr = elfGetWord(file, offset + pVaddrOffset);
+                    } else {
+                        pVaddr = elfGetDoubleWord(file, offset + pVaddrOffset);
+                    }
+                    return pVaddr;
+                }
+                offset += elfPhdrSize;
+            }
+        } catch (IOException e) {
+            return 0;
+        }
+        return 0;
+    }
+
     private void resolveAddresses(NativeLibraryMapInfo lib, String libPath,
             Set<Long> addressesToResolve) {
         Process addr2line;
@@ -196,9 +317,10 @@ public class NativeSymbolResolverTask implements IRunnableWithProgress {
                                                                     addr2line.getOutputStream()));
 
         long libStartAddress = isExecutable(lib) ? 0 : lib.getStartAddress();
+        long libLoadBase = isExecutable(lib) ? 0 : getLoadBase(libPath);
         try {
             for (Long addr : addressesToResolve) {
-                long offset = addr - libStartAddress;
+                long offset = addr - libStartAddress + libLoadBase;
                 addressWriter.write(Long.toHexString(offset));
                 addressWriter.newLine();
                 addressWriter.flush();
