@@ -47,7 +47,7 @@ for /f "delims=" %%a in ('"%java_exe%" -jar lib\archquery.jar') do set swt_path=
     rem This avoids locking the tool dir in case the user is trying to update it.
 
     set tmp_dir=%TEMP%\temp-android-tool
-    xcopy %swt_path% %tmp_dir%\%swt_path% /I /E /C /G /R /Y /Q > nul
+    xcopy "%swt_path%" "%tmp_dir%\%swt_path%" /I /E /C /G /R /Y /Q > nul
     copy /B /D /Y lib\common.jar         %tmp_dir%\lib\        > nul
     copy /B /D /Y lib\commons-codec*     %tmp_dir%\lib\        > nul
     copy /B /D /Y lib\commons-compress*  %tmp_dir%\lib\        > nul
@@ -65,7 +65,7 @@ for /f "delims=" %%a in ('"%java_exe%" -jar lib\archquery.jar') do set swt_path=
 
     rem jar_path and swt_path are relative to PWD so we don't need to adjust them, just change dirs.
     set tools_dir=%cd%
-    cd /d %tmp_dir%
+    cd /d "%tmp_dir%"
 
 :EndTempCopy
 
