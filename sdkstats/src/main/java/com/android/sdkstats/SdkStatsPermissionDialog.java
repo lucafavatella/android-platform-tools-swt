@@ -68,7 +68,7 @@ public class SdkStatsPermissionDialog extends Dialog {
 
     /** Used in the ADT welcome wizard as well. */
     public static final String FOOTER_TEXT =
-        "If you later decide to change this setting, you can do so in the" +
+        "If you later decide to change this setting, you can do so in the " +
         "\"ddms\" tool under \"File\" > \"Preferences\" > \"Usage Stats\".";
 
     private static final String BUTTON_TEXT = "Proceed";
