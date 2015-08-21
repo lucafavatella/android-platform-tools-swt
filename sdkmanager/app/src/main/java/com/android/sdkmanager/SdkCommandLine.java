@@ -484,6 +484,11 @@ class SdkCommandLine extends CommandLineParser {
         return true;
     }
 
+    @Override
+    protected String getDefaultVerb() {
+        return VERB_SDK;
+    }
+
     // -- some helpers for generic action flags
 
     /** Helper that returns true if --verbose was requested. */
