@@ -471,7 +471,7 @@ public class UIThread implements IUiSelectionListener, IClientChangeListener {
                 "ddms-128.png", //$NON-NLS-1$
                 100, 50, null));
 
-        Log.setLogOutput(new ILogOutput() {
+        Log.addLogger(new ILogOutput() {
             @Override
             public void printAndPromptLog(final LogLevel logLevel, final String tag,
                     final String message) {
