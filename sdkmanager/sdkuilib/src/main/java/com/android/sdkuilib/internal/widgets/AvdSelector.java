@@ -970,8 +970,18 @@ public final class AvdSelector {
         // get the current Display
         final Display display = mTable.getDisplay();
 
+        // log for this action.
+        ILogger log = mSdkLog;
+        if (log == null || log instanceof MessageBoxLog) {
+            // If the current logger is a message box, we use our own (to make sure
+            // to display errors right away and customize the title).
+            log = new MessageBoxLog(
+                    String.format("Result of deleting AVD '%s':", avdInfo.getName()),
+                    display, false);
+        }
+
         // check if the AVD is running
-        if (mAvdManager.isAvdRunning(avdInfo)) {
+        if (mAvdManager.isAvdRunning(avdInfo, log)) {
             display.asyncExec(new Runnable() {
                 @Override
                 public void run() {
@@ -1002,17 +1012,6 @@ public final class AvdSelector {
 
         if (result[0] == false) {
             return;
-        }
-
-        // log for this action.
-        ILogger log = mSdkLog;
-        if (log == null || log instanceof MessageBoxLog) {
-            // If the current logger is a message box, we use our own (to make sure
-            // to display errors right away and customize the title).
-            log = new MessageBoxLog(
-                String.format("Result of deleting AVD '%s':", avdInfo.getName()),
-                display,
-                false /*logErrorsOnly*/);
         }
 
         // delete the AVD
