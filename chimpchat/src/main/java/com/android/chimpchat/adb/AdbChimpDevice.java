@@ -291,11 +291,7 @@ public class AdbChimpDevice implements IChimpDevice {
     @Override
     public boolean installPackage(String path) {
         try {
-            String result = device.installPackage(path, true);
-            if (result != null) {
-                LOG.log(Level.SEVERE, "Got error installing package: "+ result);
-                return false;
-            }
+            device.installPackage(path, true);
             return true;
         } catch (InstallException e) {
             LOG.log(Level.SEVERE, "Error installing package: " + path, e);
