@@ -84,6 +84,8 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
+                "       - Nexus 5X (5.2\", 1080 × 1920: xxhdpi)\n" +
+                "       - Nexus 6P (5.7\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
                 "       - Nexus 7 (7.02\", 1200 × 1920: xhdpi)\n" +
@@ -164,6 +166,8 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
+                "       - Nexus 5X (5.2\", 1080 × 1920: xxhdpi)\n" +
+                "       - Nexus 6P (5.7\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
                 "       - Nexus 7 (7.02\", 1200 × 1920: xhdpi)\n" +
@@ -228,6 +232,8 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
+                "       - Nexus 5X (5.2\", 1080 × 1920: xxhdpi)\n" +
+                "       - Nexus 6P (5.7\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
                 "       - Nexus 7 (7.02\", 1200 × 1920: xhdpi)\n" +
@@ -287,14 +293,14 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "@@ -2 +2\n" +
                 "-    AVD Name: \n" +
                 "+    AVD Name: the_avd_name\n" +
-                "@@ -54 +54\n" +
+                "@@ -56 +56\n" +
                 "-    Status: AVD Name cannot be empty\n" +
-                "@@ -55 +54\n" +
+                "@@ -57 +56\n" +
                 "+    Status: No device selected\n",
                 SdkTestCase.getDiff(last, r));
 
         // select Nexus S device
-        a.selectComboIndex(Ctrl.COMBO_DEVICE, 8);
+        a.selectComboIndex(Ctrl.COMBO_DEVICE, 10);
         p.onDeviceComboChanged();
 
         last = r;
@@ -302,11 +308,11 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         assertEquals(
                 "@@ -3 +3\n" +
                 "-    Device: [-1]\n" +
-                "+    Device: [8]\n" +
-                "@@ -12 +12\n" +
+                "+    Device: [10]\n" +
+                "@@ -14 +14\n" +
                 "-        - Nexus S (4.0\", 480 × 800: hdpi)\n" +
                 "+       ** Nexus S (4.0\", 480 × 800: hdpi)\n" +
-                "@@ -41 +41\n" +
+                "@@ -43 +43\n" +
                 "- -- Front Cam: [-1]\n" +
                 "- -- Back  Cam: [-1]\n" +
                 "-    RAM: \n" +
@@ -315,9 +321,9 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "+    Back  Cam: [-1]\n" +
                 "+    RAM: 343\n" +
                 "+    VM : 32\n" +
-                "@@ -54 +54\n" +
+                "@@ -56 +56\n" +
                 "-    Status: No device selected\n" +
-                "@@ -55 +54\n" +
+                "@@ -57 +56\n" +
                 "+    Status: No target selected\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -328,21 +334,21 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         last = r;
         r = v.renderDialog();
         assertEquals(
-                "@@ -34 +34\n" +
+                "@@ -36 +36\n" +
                 "-    Target: [-1]\n" +
                 "-        - Android 0.0 - API Level 0\n" +
                 "+    Target: [0]\n" +
                 "+       ** Android 0.0 - API Level 0\n" +
-                "@@ -37 +37\n" +
+                "@@ -39 +39\n" +
                 "+        - ARM (arm64-v8a)\n" +
                 "+        - ARM (armeabi-v7a)\n" +
                 "+        - Intel Atom (x86)\n" +
                 "+        - Intel Atom (x86_64)\n" +
-                "@@ -41 +45\n" +
+                "@@ -43 +47\n" +
                 "+        - HVGA\n" +
-                "@@ -54 +59\n" +
+                "@@ -56 +61\n" +
                 "-    Status: No target selected\n" +
-                "@@ -55 +59\n" +
+                "@@ -57 +61\n" +
                 "+    Status: No CPU/ABI system image selected\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -353,14 +359,14 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         last = r;
         r = v.renderDialog();
         assertEquals(
-                "@@ -36 +36\n" +
+                "@@ -38 +38\n" +
                 "-    CPU/ABI: [-1]\n" +
                 "-        - ARM (arm64-v8a)\n" +
                 "+    CPU/ABI: [0]\n" +
                 "+       ** ARM (arm64-v8a)\n" +
-                "@@ -59 +59\n" +
+                "@@ -61 +61\n" +
                 "-    Status: No CPU/ABI system image selected\n" +
-                "@@ -60 +59\n" +
+                "@@ -62 +61\n" +
                 "+    Status: No skin selected\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -371,14 +377,14 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         last = r;
         r = v.renderDialog();
         assertEquals(
-                "@@ -42 +42\n" +
+                "@@ -44 +44\n" +
                 "-    Skin: [-1]\n" +
                 "-        - Skin with dynamic hardware controls\n" +
                 "+    Skin: [0]\n" +
                 "+       ** Skin with dynamic hardware controls\n" +
-                "@@ -59 +59\n" +
+                "@@ -61 +61\n" +
                 "-    Status: No skin selected\n" +
-                "@@ -60 +59\n" +
+                "@@ -62 +61\n" +
                 "+    Status: Invalid Data partition size.\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -390,14 +396,14 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         last = r;
         r = v.renderDialog();
         assertEquals(
-                "@@ -50 +50\n" +
+                "@@ -52 +52\n" +
                 "-    Data Size: \n" +
                 "-    Data Unit: [-1]\n" +
                 "+    Data Size: 200\n" +
                 "+    Data Unit: [0]\n" +
-                "@@ -59 +59\n" +
+                "@@ -61 +61\n" +
                 "-    Status: Invalid Data partition size.\n" +
-                "@@ -60 +59\n" +
+                "@@ -62 +61\n" +
                 "+    Status: SD Card path isn't valid.\n",
                 SdkTestCase.getDiff(last, r));
 
@@ -413,17 +419,17 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         last = r;
         r = v.renderDialog();
         assertEquals(
-                "@@ -52 +52\n" +
+                "@@ -54 +54\n" +
                 "-    [ ] SD by Size\n" +
                 "-    SD Size: \n" +
                 "-    SD Unit: [-1]\n" +
                 "+    [x] SD by Size\n" +
                 "+    SD Size: 16\n" +
                 "+    SD Unit: [1]\n" +
-                "@@ -58 +58\n" +
+                "@@ -60 +60\n" +
                 "-    Icon: reject_icon16.png\n" +
                 "-    Status: SD Card path isn't valid.\n" +
-                "@@ -60 +58\n" +
+                "@@ -62 +60\n" +
                 "+    Icon: null\n" +
                 "+    Status:  \n" +
                 "+ \n",
@@ -434,11 +440,13 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
         assertEquals(
                 "Title: Create new Android Virtual Device (AVD)\n" +
                 "   AVD Name: the_avd_name\n" +
-                "   Device: [8]\n" +
+                "   Device: [10]\n" +
                 "       - Nexus 9 (8.86\", 2048 × 1536: xhdpi)\n" +
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
+                "       - Nexus 5X (5.2\", 1080 × 1920: xxhdpi)\n" +
+                "       - Nexus 6P (5.7\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
                 "       - Nexus 7 (7.02\", 1200 × 1920: xhdpi)\n" +
@@ -494,7 +502,6 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 " ",
                 r2);
     }
-
 
     static class AvdCreationView {
 
