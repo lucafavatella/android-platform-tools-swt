@@ -84,7 +84,7 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
-                "       - Nexus 5X (5.2\", 1080 × 1920: xxhdpi)\n" +
+                "       - Nexus 5X (5.2\", 1080 × 1920: 420dpi)\n" +
                 "       - Nexus 6P (5.7\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
@@ -166,7 +166,7 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
-                "       - Nexus 5X (5.2\", 1080 × 1920: xxhdpi)\n" +
+                "       - Nexus 5X (5.2\", 1080 × 1920: 420dpi)\n" +
                 "       - Nexus 6P (5.7\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
@@ -232,7 +232,7 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
-                "       - Nexus 5X (5.2\", 1080 × 1920: xxhdpi)\n" +
+                "       - Nexus 5X (5.2\", 1080 × 1920: 420dpi)\n" +
                 "       - Nexus 6P (5.7\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
@@ -445,7 +445,7 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 "       - Nexus 5 (4.95\", 1080 × 1920: xxhdpi)\n" +
                 "       - Nexus 6 (5.96\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 7 (2012) (7.0\", 800 × 1280: tvdpi)\n" +
-                "       - Nexus 5X (5.2\", 1080 × 1920: xxhdpi)\n" +
+                "       - Nexus 5X (5.2\", 1080 × 1920: 420dpi)\n" +
                 "       - Nexus 6P (5.7\", 1440 × 2560: 560dpi)\n" +
                 "       - Nexus 4 (4.7\", 768 × 1280: xhdpi)\n" +
                 "       - Nexus 10 (10.055\", 2560 × 1600: xhdpi)\n" +
