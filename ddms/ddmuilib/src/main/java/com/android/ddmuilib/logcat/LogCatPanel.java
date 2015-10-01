@@ -1009,7 +1009,8 @@ public final class LogCatPanel extends SelectionDependentPanel
                     addNewFilter();
                 } else {
                     LogCatMessage m = selectedMessages.get(0);
-                    addNewFilter(m.getTag(), m.getMessage(), m.getPid(), m.getAppName(),
+                    addNewFilter(m.getTag(), m.getMessage(), Integer.toString(m.getPid()),
+                            m.getAppName(),
                             m.getLogLevel());
                 }
             }
@@ -1319,9 +1320,9 @@ public final class LogCatPanel extends SelectionDependentPanel
 
                         item.setText(new String[] {
                                 Character.toString(m.getLogLevel().getPriorityLetter()),
-                                m.getTime(),
-                                m.getPid(),
-                                m.getTid(),
+                                m.getTimestamp().toString(),
+                                Integer.toString(m.getPid()),
+                                Integer.toString(m.getTid()),
                                 m.getAppName(),
                                 m.getTag(),
                                 wrappedMessageList.get(i)

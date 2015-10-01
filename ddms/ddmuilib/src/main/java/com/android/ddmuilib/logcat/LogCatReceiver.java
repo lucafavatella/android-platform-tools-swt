@@ -34,9 +34,9 @@ import java.util.Set;
  * log messages in a circular buffer.
  */
 public final class LogCatReceiver implements LogCatListener {
-    private static LogCatMessage DEVICE_DISCONNECTED_MESSAGE =
-            new LogCatMessage(LogLevel.ERROR, "", "", "",
-                    "", "", "Device disconnected");
+
+    private static LogCatMessage DEVICE_DISCONNECTED_MESSAGE = new LogCatMessage(LogLevel.ERROR,
+            "Device disconnected");
 
     private LogCatMessageList mLogMessages;
     private IDevice mCurrentDevice;
