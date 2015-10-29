@@ -18,7 +18,7 @@ package com.android.sdkuilib.internal.repository;
 
 
 import com.android.SdkConstants;
-import com.android.sdklib.io.FileOp;
+import com.android.repository.io.FileOpUtils;
 import com.android.sdklib.repository.PkgProps;
 import com.android.sdklib.repository.SdkAddonConstants;
 import com.android.sdklib.repository.SdkRepoConstants;
@@ -93,7 +93,7 @@ public class AboutDialog extends UpdaterBaseDialog {
     private String getRevision() {
         Properties p = new Properties();
         try{
-            File sourceProp = FileOp.append(getSwtUpdaterData().getOsSdkRoot(),
+            File sourceProp = FileOpUtils.append(getSwtUpdaterData().getOsSdkRoot(),
                     SdkConstants.FD_TOOLS,
                     SdkConstants.FN_SOURCE_PROP);
             FileInputStream fis = null;

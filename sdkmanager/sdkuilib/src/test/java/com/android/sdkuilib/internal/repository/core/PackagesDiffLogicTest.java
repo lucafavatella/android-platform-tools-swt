@@ -17,6 +17,7 @@
 package com.android.sdkuilib.internal.repository.core;
 
 import com.android.SdkConstants;
+import com.android.repository.Revision;
 import com.android.sdklib.internal.repository.packages.BrokenPackage;
 import com.android.sdklib.internal.repository.packages.MockAddonPackage;
 import com.android.sdklib.internal.repository.packages.MockBrokenPackage;
@@ -32,7 +33,6 @@ import com.android.sdklib.internal.repository.sources.SdkRepoSource;
 import com.android.sdklib.internal.repository.sources.SdkSource;
 import com.android.sdklib.internal.repository.updater.ISettingsPage;
 import com.android.sdklib.internal.repository.updater.PkgItem;
-import com.android.sdklib.repository.FullRevision;
 import com.android.sdklib.repository.PkgProps;
 import com.android.sdkuilib.internal.repository.MockSwtUpdaterData;
 
@@ -967,7 +967,7 @@ public class PackagesDiffLogicTest extends TestCase {
                 new MockPlatformToolPackage(src1, 3),
         });
         m.updateSourcePackages(src1, new Package[] {
-                new MockToolPackage(src1, new FullRevision(3, 0, 1), 3),          // Tools 3.0.1
+                new MockToolPackage(src1, new Revision(3, 0, 1), 3),          // Tools 3.0.1
         });
         m.updateEnd();
 
@@ -991,12 +991,12 @@ public class PackagesDiffLogicTest extends TestCase {
 
         m.updateStart();
         m.updateSourcePackages(src1, new Package[] {
-                new MockToolPackage(src1, new FullRevision(2, 0, 0), 3),          // Tools 2
-                new MockToolPackage(src1, new FullRevision(4, 0, 0, 1), 3),       // Tools 4 rc1
-                new MockPlatformToolPackage(src1, new FullRevision(3, 0, 0)),     // Plat-T 3
-                new MockPlatformToolPackage(src1, new FullRevision(5, 0, 0, 1)),  // Plat-T 5 rc1
-                new MockBuildToolPackage(src1, new FullRevision(6, 0, 0)),
-                new MockBuildToolPackage(src1, new FullRevision(7, 0, 0, 1))
+                new MockToolPackage(src1, new Revision(2, 0, 0), 3),          // Tools 2
+                new MockToolPackage(src1, new Revision(4, 0, 0, 1), 3),       // Tools 4 rc1
+                new MockPlatformToolPackage(src1, new Revision(3, 0, 0)),     // Plat-T 3
+                new MockPlatformToolPackage(src1, new Revision(5, 0, 0, 1)),  // Plat-T 5 rc1
+                new MockBuildToolPackage(src1, new Revision(6, 0, 0)),
+                new MockBuildToolPackage(src1, new Revision(7, 0, 0, 1))
         });
         m.updateEnd();
 
@@ -1022,10 +1022,10 @@ public class PackagesDiffLogicTest extends TestCase {
 
         m.updateStart();
         m.updateSourcePackages(src1, new Package[] {
-                new MockToolPackage(src1, new FullRevision(2, 0, 0), 3),          // Tools 2
-                new MockToolPackage(src1, new FullRevision(4, 0, 0, 1), 3),       // Tools 4 rc1
-                new MockPlatformToolPackage(src1, new FullRevision(3, 0, 0)),     // Plat-T 3
-                new MockPlatformToolPackage(src1, new FullRevision(5, 0, 0, 1)),  // Plat-T 5 rc1
+                new MockToolPackage(src1, new Revision(2, 0, 0), 3),          // Tools 2
+                new MockToolPackage(src1, new Revision(4, 0, 0, 1), 3),       // Tools 4 rc1
+                new MockPlatformToolPackage(src1, new Revision(3, 0, 0)),     // Plat-T 3
+                new MockPlatformToolPackage(src1, new Revision(5, 0, 0, 1)),  // Plat-T 5 rc1
         });
         m.updateEnd();
 
@@ -1059,10 +1059,10 @@ public class PackagesDiffLogicTest extends TestCase {
         });
         m.updateSourcePackages(src1, new Package[] {
                 new MockToolPackage(src1, 3, 3),                                  // Tools 3
-                new MockToolPackage(src1, new FullRevision(3, 0, 1), 3),          // Tools 3.0.1
-                new MockToolPackage(src1, new FullRevision(4, 0, 0, 1), 3),       // Tools 4 rc1
-                new MockPlatformToolPackage(src1, new FullRevision(3, 0, 1)),     // PT    3.0.1
-                new MockPlatformToolPackage(src1, new FullRevision(4, 0, 0, 1)),  // PT    4 rc1
+                new MockToolPackage(src1, new Revision(3, 0, 1), 3),          // Tools 3.0.1
+                new MockToolPackage(src1, new Revision(4, 0, 0, 1), 3),       // Tools 4 rc1
+                new MockPlatformToolPackage(src1, new Revision(3, 0, 1)),     // PT    3.0.1
+                new MockPlatformToolPackage(src1, new Revision(4, 0, 0, 1)),  // PT    4 rc1
         });
         m.updateEnd();
 
@@ -1112,15 +1112,15 @@ public class PackagesDiffLogicTest extends TestCase {
 
         m.updateStart();
         m.updateSourcePackages(null /*locals*/, new Package[] {
-                new MockToolPackage(src1, new FullRevision(3, 0, 1, 1), 4),       //  T 3.0.1rc1
-                new MockPlatformToolPackage(src1, new FullRevision(4, 0, 1, 1)),  // PT 4.0.1rc1
+                new MockToolPackage(src1, new Revision(3, 0, 1, 1), 4),       //  T 3.0.1rc1
+                new MockPlatformToolPackage(src1, new Revision(4, 0, 1, 1)),  // PT 4.0.1rc1
                 new MockPlatformPackage(src1, 1, 2, 3),    // API 1
         });
         m.updateSourcePackages(src1, new Package[] {
-                new MockToolPackage(src1, new FullRevision(3, 0, 0), 4),          //  T 3.0.0
-                new MockToolPackage(src1, new FullRevision(3, 0, 1, 2), 4),       //  T 3.0.1rc2
-                new MockPlatformToolPackage(src1, new FullRevision(4, 0, 0)),     // PT 4.0.0
-                new MockPlatformToolPackage(src1, new FullRevision(4, 0, 1, 2)),  // PT 4.0.1 rc2
+                new MockToolPackage(src1, new Revision(3, 0, 0), 4),          //  T 3.0.0
+                new MockToolPackage(src1, new Revision(3, 0, 1, 2), 4),       //  T 3.0.1rc2
+                new MockPlatformToolPackage(src1, new Revision(4, 0, 0)),     // PT 4.0.0
+                new MockPlatformToolPackage(src1, new Revision(4, 0, 1, 2)),  // PT 4.0.1 rc2
         });
         m.updateEnd();
 
@@ -1168,13 +1168,13 @@ public class PackagesDiffLogicTest extends TestCase {
         m.uncheckAllItems();
         m.updateStart();
         m.updateSourcePackages(null /*locals*/, new Package[] {
-                new MockToolPackage(src1, new FullRevision(3, 0, 1, 1), 4),       //  T 3.0.1rc1
-                new MockPlatformToolPackage(src1, new FullRevision(4, 0, 1, 1)),  // PT 4.0.1rc1
+                new MockToolPackage(src1, new Revision(3, 0, 1, 1), 4),       //  T 3.0.1rc1
+                new MockPlatformToolPackage(src1, new Revision(4, 0, 1, 1)),  // PT 4.0.1rc1
                 new MockPlatformPackage(src1, 1, 2, 3),    // API 1
         });
         m.updateSourcePackages(src1, new Package[] {
-                new MockToolPackage(src1, new FullRevision(3, 0, 1), 4),          //  T 3.0.1
-                new MockPlatformToolPackage(src1, new FullRevision(4, 0, 1)),     // PT 4.0.1
+                new MockToolPackage(src1, new Revision(3, 0, 1), 4),          //  T 3.0.1
+                new MockPlatformToolPackage(src1, new Revision(4, 0, 1)),     // PT 4.0.1
         });
         m.updateEnd();
 
@@ -1234,13 +1234,13 @@ public class PackagesDiffLogicTest extends TestCase {
         m.uncheckAllItems();
         m.updateStart();
         m.updateSourcePackages(null /*locals*/, new Package[] {
-                new MockToolPackage(src1, new FullRevision(3, 0, 1), 4),          //  T 3.0.1
-                new MockPlatformToolPackage(src1, new FullRevision(4, 0, 1)),     // PT 4.0.1
+                new MockToolPackage(src1, new Revision(3, 0, 1), 4),          //  T 3.0.1
+                new MockPlatformToolPackage(src1, new Revision(4, 0, 1)),     // PT 4.0.1
                 new MockPlatformPackage(src1, 1, 2, 3),    // API 1
         });
         m.updateSourcePackages(src1, new Package[] {
-                new MockToolPackage(src1, new FullRevision(3, 0, 1), 4),          //  T 3.0.1
-                new MockPlatformToolPackage(src1, new FullRevision(4, 0, 1)),     // PT 4.0.1
+                new MockToolPackage(src1, new Revision(3, 0, 1), 4),          //  T 3.0.1
+                new MockPlatformToolPackage(src1, new Revision(4, 0, 1)),     // PT 4.0.1
         });
         m.updateEnd();
 
@@ -1266,9 +1266,9 @@ public class PackagesDiffLogicTest extends TestCase {
 
         m.updateStart();
         m.updateSourcePackages(src1, new Package[] {
-                new MockToolPackage        (src1, new FullRevision(2, 0, 0), 3),  // Tools 2
-                new MockPlatformToolPackage(src1, new FullRevision(3, 0, 0)),     // Plat-T 3
-                new MockBuildToolPackage   (src1, new FullRevision(4, 0, 0)),     // Build-T 3
+                new MockToolPackage        (src1, new Revision(2, 0, 0), 3),  // Tools 2
+                new MockPlatformToolPackage(src1, new Revision(3, 0, 0)),     // Plat-T 3
+                new MockBuildToolPackage   (src1, new Revision(4, 0, 0)),     // Build-T 3
         });
         m.updateEnd();
 
@@ -1319,12 +1319,12 @@ public class PackagesDiffLogicTest extends TestCase {
         m.uncheckAllItems();
         m.updateStart();
         m.updateSourcePackages(null /*locals*/, new Package[] {
-                new MockToolPackage        (null, new FullRevision(2, 0, 0), 3),  // Tools 2
+                new MockToolPackage        (null, new Revision(2, 0, 0), 3),  // Tools 2
         });
         m.updateSourcePackages(src1, new Package[] {
-                new MockToolPackage        (src1, new FullRevision(2, 1, 0), 3),  // Tools 2.1
-                new MockPlatformToolPackage(src1, new FullRevision(3, 0, 0)),     // Plat-T 3.1
-                new MockBuildToolPackage   (src1, new FullRevision(4, 0, 0)),     // Build-T 4.1
+                new MockToolPackage        (src1, new Revision(2, 1, 0), 3),  // Tools 2.1
+                new MockPlatformToolPackage(src1, new Revision(3, 0, 0)),     // Plat-T 3.1
+                new MockBuildToolPackage   (src1, new Revision(4, 0, 0)),     // Build-T 4.1
         });
         m.updateEnd();
 
@@ -1345,14 +1345,14 @@ public class PackagesDiffLogicTest extends TestCase {
         m.uncheckAllItems();
         m.updateStart();
         m.updateSourcePackages(null /*locals*/, new Package[] {
-                new MockToolPackage        (null, new FullRevision(2, 0, 0), 3),  // Tools 2
-                new MockPlatformToolPackage(null, new FullRevision(3, 0, 0)),     // Plat-T 3
-                new MockBuildToolPackage   (null, new FullRevision(4, 0, 0)),     // Build-T 4
+                new MockToolPackage        (null, new Revision(2, 0, 0), 3),  // Tools 2
+                new MockPlatformToolPackage(null, new Revision(3, 0, 0)),     // Plat-T 3
+                new MockBuildToolPackage   (null, new Revision(4, 0, 0)),     // Build-T 4
         });
         m.updateSourcePackages(src1, new Package[] {
-                new MockToolPackage        (src1, new FullRevision(2, 1, 0), 3),  // Tools 2.1
-                new MockPlatformToolPackage(src1, new FullRevision(3, 1, 0)),     // Plat-T 3.1
-                new MockBuildToolPackage   (src1, new FullRevision(4, 1, 0)),     // Build-T 4.1
+                new MockToolPackage        (src1, new Revision(2, 1, 0), 3),  // Tools 2.1
+                new MockPlatformToolPackage(src1, new Revision(3, 1, 0)),     // Plat-T 3.1
+                new MockBuildToolPackage   (src1, new Revision(4, 1, 0)),     // Build-T 4.1
         });
         m.updateEnd();
 

@@ -17,12 +17,12 @@
 package com.android.sdkuilib.internal.repository.core;
 
 import com.android.SdkConstants;
+import com.android.repository.Revision;
 import com.android.sdklib.AndroidVersion;
 import com.android.sdklib.IAndroidTarget;
 import com.android.sdklib.internal.repository.packages.BuildToolPackage;
 import com.android.sdklib.internal.repository.packages.ExtraPackage;
 import com.android.sdklib.internal.repository.packages.IAndroidVersionProvider;
-import com.android.sdklib.internal.repository.packages.IFullRevisionProvider;
 import com.android.sdklib.internal.repository.packages.Package;
 import com.android.sdklib.internal.repository.packages.Package.UpdateInfo;
 import com.android.sdklib.internal.repository.packages.PlatformPackage;
@@ -32,8 +32,6 @@ import com.android.sdklib.internal.repository.packages.ToolPackage;
 import com.android.sdklib.internal.repository.sources.SdkSource;
 import com.android.sdklib.internal.repository.updater.PkgItem;
 import com.android.sdklib.internal.repository.updater.PkgItem.PkgState;
-import com.android.sdklib.repository.FullRevision;
-import com.android.sdklib.repository.FullRevision.PreviewComparison;
 import com.android.sdkuilib.internal.repository.SwtUpdaterData;
 import com.android.sdkuilib.internal.repository.ui.PackagesPageIcons;
 import com.android.utils.Pair;
@@ -100,9 +98,9 @@ public class PackagesDiffLogic {
         SparseArray<List<PkgItem>> platformItems = new SparseArray<List<PkgItem>>();
 
         boolean hasTools = false;
-        Map<Class<?>, Pair<PkgItem, FullRevision>> toolsCandidates = Maps.newHashMap();
-        toolsCandidates.put(PlatformToolPackage.class, Pair.of((PkgItem)null, (FullRevision)null));
-        toolsCandidates.put(BuildToolPackage.class,    Pair.of((PkgItem)null, (FullRevision)null));
+        Map<Class<?>, Pair<PkgItem, Revision>> toolsCandidates = Maps.newHashMap();
+        toolsCandidates.put(PlatformToolPackage.class, Pair.of((PkgItem)null, (Revision)null));
+        toolsCandidates.put(BuildToolPackage.class,    Pair.of((PkgItem)null, (Revision)null));
 
         // sort items in platforms... directly deal with new/update items
         List<PkgItem> allItems = getAllPkgItems();
@@ -143,27 +141,25 @@ public class PackagesDiffLogic {
                     !item.getRevision().isPreview()) {
                 boolean sameFound = false;
                 Package newPkg = item.getMainPackage();
-                if (newPkg instanceof IFullRevisionProvider) {
-                    // We have a potential new non-preview package; but this kind of package
-                    // supports having previews, which means we want to make sure we're not
-                    // offering an older "new" non-preview if there's a newer preview installed.
-                    //
-                    // We should get into this odd situation only when updating an RC/preview
-                    // by a final release pkg.
 
-                    IFullRevisionProvider newPkg2 = (IFullRevisionProvider) newPkg;
-                    for (PkgItem item2 : allItems) {
-                        if (item2.getState() == PkgState.INSTALLED) {
-                            Package installed = item2.getMainPackage();
+                // We have a potential new non-preview package; but this kind of package
+                // supports having previews, which means we want to make sure we're not
+                // offering an older "new" non-preview if there's a newer preview installed.
+                //
+                // We should get into this odd situation only when updating an RC/preview
+                // by a final release pkg.
 
-                            if (installed.getRevision().isPreview() &&
-                                    newPkg2.sameItemAs(installed, PreviewComparison.IGNORE)) {
-                                sameFound = true;
+                for (PkgItem item2 : allItems) {
+                    if (item2.getState() == PkgState.INSTALLED) {
+                        Package installed = item2.getMainPackage();
 
-                                if (installed.canBeUpdatedBy(newPkg) == UpdateInfo.UPDATE) {
-                                    item.setChecked(true);
-                                    break;
-                                }
+                        if (installed.getRevision().isPreview() &&
+                                newPkg.sameItemAs(installed, Revision.PreviewComparison.IGNORE)) {
+                            sameFound = true;
+
+                            if (installed.canBeUpdatedBy(newPkg) == UpdateInfo.UPDATE) {
+                                item.setChecked(true);
+                                break;
                             }
                         }
                     }
@@ -188,8 +184,8 @@ public class PackagesDiffLogic {
                                 // There's one such package installed, we don't need candidates.
                                 toolsCandidates.remove(clazz);
                             } else if (toolsCandidates.containsKey(clazz)) {
-                                Pair<PkgItem, FullRevision> val = toolsCandidates.get(clazz);
-                                FullRevision rev = p.getRevision();
+                                Pair<PkgItem, Revision> val = toolsCandidates.get(clazz);
+                                Revision rev = p.getRevision();
                                 if (!rev.isPreview()) {
                                     // Don't auto-select previews.
                                     if (val.getSecond() == null ||
@@ -209,7 +205,7 @@ public class PackagesDiffLogic {
 
         // Select the top platform/build-tool found above if needed.
         if (selectTop && hasTools) {
-            for (Pair<PkgItem, FullRevision> candidate : toolsCandidates.values()) {
+            for (Pair<PkgItem, Revision> candidate : toolsCandidates.values()) {
                 PkgItem item = candidate.getFirst();
                 if (item != null) {
                     item.setChecked(true);

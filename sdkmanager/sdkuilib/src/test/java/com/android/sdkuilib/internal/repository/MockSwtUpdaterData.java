@@ -16,6 +16,8 @@
 
 package com.android.sdkuilib.internal.repository;
 
+import com.android.repository.io.FileOp;
+import com.android.repository.io.FileOpUtils;
 import com.android.sdklib.SdkManager;
 import com.android.sdklib.internal.repository.DownloadCache;
 import com.android.sdklib.internal.repository.ITask;
@@ -31,7 +33,6 @@ import com.android.sdklib.internal.repository.sources.SdkSources;
 import com.android.sdklib.internal.repository.updater.ArchiveInfo;
 import com.android.sdklib.internal.repository.updater.SettingsController;
 import com.android.sdklib.internal.repository.updater.SettingsController.Settings;
-import com.android.sdklib.io.FileOp;
 import com.android.sdklib.mock.MockLog;
 import com.android.sdkuilib.internal.repository.icons.ImageFactory;
 import com.android.utils.ILogger;
@@ -160,7 +161,7 @@ public class MockSwtUpdaterData extends SwtUpdaterData {
         private Properties mProperties;
 
         MockSettingsController(ILogger sdkLog, Settings settings) {
-            super(new FileOp(), sdkLog, settings);
+            super(FileOpUtils.create(), sdkLog, settings);
         }
 
         void setProperties(Properties properties) {

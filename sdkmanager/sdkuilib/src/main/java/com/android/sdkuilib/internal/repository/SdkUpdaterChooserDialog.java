@@ -19,6 +19,7 @@ package com.android.sdkuilib.internal.repository;
 import com.android.SdkConstants;
 import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
+import com.android.repository.Revision;
 import com.android.sdklib.AndroidVersion;
 import com.android.sdklib.internal.repository.archives.Archive;
 import com.android.sdklib.internal.repository.packages.IAndroidVersionProvider;
@@ -26,7 +27,6 @@ import com.android.sdklib.internal.repository.packages.Package;
 import com.android.sdklib.internal.repository.sources.SdkSource;
 import com.android.sdklib.internal.repository.updater.ArchiveInfo;
 import com.android.sdklib.internal.repository.updater.SdkUpdaterLogic;
-import com.android.sdklib.repository.FullRevision;
 import com.android.sdklib.repository.License;
 import com.android.sdkuilib.internal.repository.icons.ImageFactory;
 import com.android.sdkuilib.ui.GridDialog;
@@ -506,8 +506,8 @@ final class SdkUpdaterChooserDialog extends GridDialog {
         if (aOld != null) {
             Package pOld = aOld.getParentPackage();
 
-            FullRevision rOld = pOld.getRevision();
-            FullRevision rNew = pNew.getRevision();
+            Revision rOld = pOld.getRevision();
+            Revision rNew = pNew.getRevision();
 
             boolean showRev = true;
 

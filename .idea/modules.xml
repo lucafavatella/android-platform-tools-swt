@@ -12,6 +12,7 @@
       <module fileurl="file://$PROJECT_DIR$/hierarchyviewer2/hierarchyviewer2lib/hierarchyviewer2lib.iml" filepath="$PROJECT_DIR$/hierarchyviewer2/hierarchyviewer2lib/hierarchyviewer2lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/../base/layoutlib-api/layoutlib-api-base.iml" filepath="$PROJECT_DIR$/../base/layoutlib-api/layoutlib-api-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/../base/perflib/perflib.iml" filepath="$PROJECT_DIR$/../base/perflib/perflib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../base/repository/repository.iml" filepath="$PROJECT_DIR$/../base/repository/repository.iml" />
       <module fileurl="file://$PROJECT_DIR$/../base/sdklib/sdklib-base.iml" filepath="$PROJECT_DIR$/../base/sdklib/sdklib-base.iml" />
       <module fileurl="file://$PROJECT_DIR$/sdkmanager/app/sdkmanager.iml" filepath="$PROJECT_DIR$/sdkmanager/app/sdkmanager.iml" />
       <module fileurl="file://$PROJECT_DIR$/sdkstats/sdkstats.iml" filepath="$PROJECT_DIR$/sdkstats/sdkstats.iml" />

@@ -16,6 +16,7 @@
 
 package com.android.sdkuilib.internal.repository;
 
+import com.android.repository.Revision;
 import com.android.sdklib.SdkManager;
 import com.android.sdklib.internal.avd.AvdManager;
 import com.android.sdklib.internal.repository.DownloadCache;
@@ -33,7 +34,6 @@ import com.android.sdklib.internal.repository.updater.ArchiveInfo;
 import com.android.sdklib.internal.repository.updater.IUpdaterData;
 import com.android.sdklib.internal.repository.updater.SdkUpdaterLogic;
 import com.android.sdklib.internal.repository.updater.SettingsController;
-import com.android.sdklib.repository.FullRevision;
 import com.android.utils.ILogger;
 
 import java.util.ArrayList;
@@ -369,13 +369,13 @@ public class SdkUpdaterLogicTest extends TestCase {
 
         final MockPlatformToolPackage pt1rc = new MockPlatformToolPackage(
                                                     null,
-                                                    new FullRevision(1, 0, 0, 1));
+                                                    new Revision(1, 0, 0, 1));
         final MockPlatformToolPackage pt2 = new MockPlatformToolPackage(2);
 
         // Tools rev 2 requires at least plat-tools 1rc1
         final MockToolPackage t2 = new MockToolPackage(null,
-                                                       new FullRevision(2),           // tools rev
-                                                       new FullRevision(1, 0, 0, 1)); // min-pt-rev
+                                                       new Revision(2),           // tools rev
+                                                       new Revision(1, 0, 0, 1)); // min-pt-rev
 
         final MockPlatformPackage p2 = new MockPlatformPackage(2, 1, 2 /*min-tools*/);
 
@@ -431,17 +431,17 @@ public class SdkUpdaterLogicTest extends TestCase {
 
         final MockPlatformToolPackage pt1rc = new MockPlatformToolPackage(
                                                     null,
-                                                    new FullRevision(1, 0, 0, 1));
+                                                    new Revision(1, 0, 0, 1));
         final MockPlatformToolPackage pt2 = new MockPlatformToolPackage(2);
 
         // Tools rev 1rc1 requires plat-tools 1rc1, and tools 2 requires plat-tools 2.
         final MockToolPackage t1rc = new MockToolPackage(null,
-                                                       new FullRevision(1, 0, 0, 1),  // tools rev
-                                                       new FullRevision(1, 0, 0, 1)); // min-pt-rev
+                                                       new Revision(1, 0, 0, 1),  // tools rev
+                                                       new Revision(1, 0, 0, 1)); // min-pt-rev
         final MockToolPackage t2 = new MockToolPackage(null, 2, 2);
 
         // Platform depends on min-tools 1rc1, so any of tools 1rc1 or 2 would satisfy.
-        final MockPlatformPackage p2 = new MockPlatformPackage(2, 1, new FullRevision(1, 0, 0, 1));
+        final MockPlatformPackage p2 = new MockPlatformPackage(2, 1, new Revision(1, 0, 0, 1));
 
         // Note: the mock updater logic gets the remotes packages from the array given
         // here and bypasses the source (to avoid fetching any actual URLs)

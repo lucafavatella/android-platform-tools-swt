@@ -18,13 +18,13 @@ package com.android.sdkuilib.internal.widgets;
 
 import com.android.SdkConstants;
 import com.android.annotations.Nullable;
+import com.android.repository.io.FileOp;
 import com.android.sdklib.IAndroidTarget;
 import com.android.sdklib.ISystemImage.LocationType;
 import com.android.sdklib.SdkManager;
 import com.android.sdklib.SdkManagerTestCase;
 import com.android.sdklib.SystemImage;
 import com.android.sdklib.internal.avd.AvdInfo;
-import com.android.sdklib.io.FileOp;
 import com.android.sdkuilib.internal.widgets.AvdCreationPresenter.Ctrl;
 import com.android.sdkuilib.internal.widgets.AvdCreationPresenter.IWidgetAdapter;
 import com.android.testutils.SdkTestCase;
