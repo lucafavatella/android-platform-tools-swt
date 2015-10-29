@@ -20,6 +20,7 @@ import com.android.SdkConstants;
 import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.repository.Revision;
+import com.android.repository.api.License;
 import com.android.sdklib.AndroidVersion;
 import com.android.sdklib.internal.repository.archives.Archive;
 import com.android.sdklib.internal.repository.packages.IAndroidVersionProvider;
@@ -27,7 +28,6 @@ import com.android.sdklib.internal.repository.packages.Package;
 import com.android.sdklib.internal.repository.sources.SdkSource;
 import com.android.sdklib.internal.repository.updater.ArchiveInfo;
 import com.android.sdklib.internal.repository.updater.SdkUpdaterLogic;
-import com.android.sdklib.repository.License;
 import com.android.sdkuilib.internal.repository.icons.ImageFactory;
 import com.android.sdkuilib.ui.GridDialog;
 
@@ -326,8 +326,8 @@ final class SdkUpdaterChooserDialog extends GridDialog {
             if (a != null) {
                 License license = a.getParentPackage().getLicense();
                 boolean hasLicense = license != null &&
-                                     license.getLicense() != null &&
-                                     license.getLicense().length() > 0;
+                                     license.getValue() != null &&
+                                     license.getValue().length() > 0;
                 ai.setAccepted(!hasLicense);
             }
         }
@@ -560,7 +560,7 @@ final class SdkUpdaterChooserDialog extends GridDialog {
 
         License license = pNew.getLicense();
         if (license != null) {
-            String text = license.getLicense();
+            String text = license.getValue();
             if (text != null) {
                 addSectionTitle("License\n");
                 addText(text.trim(), "\n\n");                                   //$NON-NLS-1$
@@ -606,7 +606,7 @@ final class SdkUpdaterChooserDialog extends GridDialog {
         }
 
         if (license != null) {
-            String text = license.getLicense();
+            String text = license.getValue();
             if (text != null) {
                 addSectionTitle("\nLicense\n");
                 addText(text.trim(), "\n\n");                                   //$NON-NLS-1$
@@ -1051,8 +1051,8 @@ final class SdkUpdaterChooserDialog extends GridDialog {
         for (ArchiveInfo info : archives) {
             String ref = noLicense;
             License license = getLicense(info);
-            if (license != null && license.getLicenseRef() != null) {
-                ref = prettyLicenseRef(license.getLicenseRef());
+            if (license != null && license.getId() != null) {
+                ref = prettyLicenseRef(license.getId());
             }
 
             List<ArchiveInfo> list = map.get(ref);
