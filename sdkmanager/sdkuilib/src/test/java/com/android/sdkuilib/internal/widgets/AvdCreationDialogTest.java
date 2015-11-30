@@ -18,6 +18,7 @@ package com.android.sdkuilib.internal.widgets;
 
 import com.android.SdkConstants;
 import com.android.annotations.Nullable;
+import com.android.repository.Revision;
 import com.android.repository.io.FileOp;
 import com.android.sdklib.IAndroidTarget;
 import com.android.sdklib.ISystemImage.LocationType;
@@ -53,22 +54,26 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
                 LocationType.IN_IMAGES_SUBFOLDER,
                 SystemImage.DEFAULT_TAG,
                 SdkConstants.ABI_ARMEABI_V7A,
-                FileOp.EMPTY_FILE_ARRAY), null);
+                FileOp.EMPTY_FILE_ARRAY,
+                new Revision(23, 1)), null);
         makeSystemImageFolder(new SystemImage(sdkMan, mTarget,
                 LocationType.IN_IMAGES_SUBFOLDER,
                 SystemImage.DEFAULT_TAG,
                 SdkConstants.ABI_ARM64_V8A,
-                FileOp.EMPTY_FILE_ARRAY), null);
+                FileOp.EMPTY_FILE_ARRAY,
+                new Revision(23, 1)), null);
         makeSystemImageFolder(new SystemImage(sdkMan, mTarget,
                 LocationType.IN_IMAGES_SUBFOLDER,
                 SystemImage.DEFAULT_TAG,
                 SdkConstants.ABI_INTEL_ATOM,
-                FileOp.EMPTY_FILE_ARRAY), null);
+                FileOp.EMPTY_FILE_ARRAY,
+                new Revision(23, 1)), null);
         makeSystemImageFolder(new SystemImage(sdkMan, mTarget,
                 LocationType.IN_IMAGES_SUBFOLDER,
                 SystemImage.DEFAULT_TAG,
                 SdkConstants.ABI_INTEL_ATOM64,
-                FileOp.EMPTY_FILE_ARRAY), null);
+                FileOp.EMPTY_FILE_ARRAY,
+                new Revision(23, 1)), null);
 
         sdkMan.reloadSdk(getLog());
     }
