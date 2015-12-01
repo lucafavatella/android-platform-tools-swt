@@ -28,7 +28,7 @@ import com.android.sdklib.internal.avd.AvdManager;
 import com.android.sdklib.internal.repository.ITask;
 import com.android.sdklib.internal.repository.ITaskMonitor;
 import com.android.sdklib.internal.repository.updater.SettingsController;
-import com.android.sdklib.repository.descriptors.IdDisplay;
+import com.android.sdklib.repositoryv2.IdDisplay;
 import com.android.sdkuilib.internal.repository.icons.ImageFactory;
 import com.android.sdkuilib.internal.repository.icons.ImageFactory.Filter;
 import com.android.sdkuilib.internal.repository.ui.AvdManagerWindowImpl1;

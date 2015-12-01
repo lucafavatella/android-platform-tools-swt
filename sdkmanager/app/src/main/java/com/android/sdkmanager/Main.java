@@ -370,7 +370,7 @@ public class Main {
                 }
 
             } else if (SdkCommandLine.OBJECT_ADB.equals(directObject)) {
-                updateAdb();
+                // Deprecated, do nothing
 
             }
         } else if (SdkCommandLine.VERB_SDK.equals(verb)) {
@@ -1009,11 +1009,6 @@ public class Main {
             displaySkinList  (target, "     Skins: ");
             displayTagAbiList(target, " Tag/ABIs : ");
 
-            if (target.getUsbVendorId() != IAndroidTarget.NO_USB_ID) {
-                mSdkLog.info("     Adds USB support for devices (Vendor: 0x%04X)\n",
-                        target.getUsbVendorId());
-            }
-
             index++;
         }
     }
@@ -1621,26 +1616,6 @@ public class Main {
             errorAndExit(e.getMessage());
         }
     }
-
-    /**
-     * Updates adb with the USB devices declared in the SDK add-ons.
-     */
-    private void updateAdb() {
-        try {
-            mSdkManager.updateAdb();
-
-            mSdkLog.info(
-                    "adb has been updated. You must restart adb with the following commands\n" +
-                    "\tadb kill-server\n" +
-                    "\tadb start-server\n");
-        } catch (AndroidLocationException e) {
-            errorAndExit(e.getMessage());
-        } catch (IOException e) {
-            errorAndExit(e.getMessage());
-        }
-    }
-
-
 
     /**
      * Prompts the user to setup a hardware config for a Platform-based AVD.
