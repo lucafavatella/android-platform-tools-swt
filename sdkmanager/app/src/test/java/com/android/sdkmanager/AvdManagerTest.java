@@ -18,6 +18,7 @@ package com.android.sdkmanager;
 
 import com.android.SdkConstants;
 import com.android.io.FileWrapper;
+import com.android.repository.io.FileOpUtils;
 import com.android.sdklib.IAndroidTarget;
 import com.android.sdklib.SdkManagerTestCase;
 import com.android.sdklib.SystemImage;
@@ -39,7 +40,7 @@ public class AvdManagerTest extends SdkManagerTestCase {
         super.setUp();
 
         mTarget = getSdkManager().getTargets()[0];
-        mAvdFolder = AvdInfo.getDefaultAvdFolder(getAvdManager(), getName());
+        mAvdFolder = AvdInfo.getDefaultAvdFolder(getAvdManager(), getName(), FileOpUtils.create());
     }
 
     @Override

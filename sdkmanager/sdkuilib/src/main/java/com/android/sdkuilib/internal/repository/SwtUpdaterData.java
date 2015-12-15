@@ -24,6 +24,7 @@ import com.android.sdklib.internal.repository.archives.Archive;
 import com.android.sdklib.internal.repository.updater.ArchiveInfo;
 import com.android.sdklib.internal.repository.updater.SdkUpdaterLogic;
 import com.android.sdklib.internal.repository.updater.UpdaterData;
+import com.android.sdklib.repositoryv2.AndroidSdkHandler;
 import com.android.sdkuilib.internal.repository.icons.ImageFactory;
 import com.android.sdkuilib.internal.repository.ui.SdkUpdaterWindowImpl2;
 import com.android.utils.ILogger;
@@ -58,7 +59,7 @@ public class SwtUpdaterData extends UpdaterData {
      * @param osSdkRoot The OS path to the SDK root.
      */
     public SwtUpdaterData(String osSdkRoot, ILogger sdkLog) {
-        super(osSdkRoot, sdkLog);
+        super(AndroidSdkHandler.getInstance(), sdkLog);
     }
 
     // ----- getters, setters ----

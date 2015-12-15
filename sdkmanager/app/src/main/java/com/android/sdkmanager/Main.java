@@ -24,6 +24,7 @@ import com.android.annotations.VisibleForTesting.Visibility;
 import com.android.io.FileWrapper;
 import com.android.prefs.AndroidLocation;
 import com.android.prefs.AndroidLocation.AndroidLocationException;
+import com.android.repository.io.FileOpUtils;
 import com.android.sdklib.IAndroidTarget;
 import com.android.sdklib.IAndroidTarget.OptionalLibrary;
 import com.android.sdklib.ISystemImage;
@@ -49,6 +50,7 @@ import com.android.sdklib.repository.SdkAddonConstants;
 import com.android.sdklib.repository.SdkRepoConstants;
 import com.android.sdklib.repository.descriptors.IdDisplay;
 import com.android.sdklib.repository.local.LocalSysImgPkgInfo;
+import com.android.sdklib.repositoryv2.AndroidSdkHandler;
 import com.android.sdkuilib.internal.widgets.MessageBoxLog;
 import com.android.sdkuilib.repository.AvdManagerWindow;
 import com.android.sdkuilib.repository.AvdManagerWindow.AvdInvocationContext;
@@ -107,6 +109,7 @@ public class Main {
     private ILogger mSdkLog;
     /** The SDK manager parses the SDK folder and gives access to the content. */
     private SdkManager mSdkManager;
+    private AndroidSdkHandler mSdkHandler;
     /** Command-line processor with options specific to SdkManager. */
     private SdkCommandLine mSdkCommandLine;
     /** The working directory, either null or set to an existing absolute canonical directory. */
@@ -275,6 +278,8 @@ public class Main {
      */
     private void parseSdk() {
         mSdkManager = SdkManager.createManager(mOsSdkFolder, mSdkLog);
+        mSdkHandler = AndroidSdkHandler.getInstance();
+        mSdkHandler.setLocation(new File(mOsSdkFolder));
 
         if (mSdkManager == null) {
             errorAndExit("Unable to parse SDK content.");
@@ -292,7 +297,7 @@ public class Main {
     @VisibleForTesting(visibility=Visibility.PRIVATE)
     protected AvdManager getAvdManager() throws AndroidLocationException {
         if (mAvdManager == null) {
-            mAvdManager = AvdManager.getInstance(mSdkManager.getLocalSdk(), mSdkLog);
+            mAvdManager = AvdManager.getInstance(mSdkHandler, mSdkLog);
         }
         return mAvdManager;
     }
@@ -1274,7 +1279,7 @@ public class Main {
             if (paramFolderPath != null) {
                 avdFolder = new File(paramFolderPath);
             } else {
-                avdFolder = AvdInfo.getDefaultAvdFolder(avdManager, avdName);
+                avdFolder = AvdInfo.getDefaultAvdFolder(avdManager, avdName, FileOpUtils.create());
             }
 
             // Validate skin is either default (empty) or NNNxMMM or a valid skin name.

@@ -20,6 +20,7 @@ import com.android.SdkConstants;
 import com.android.annotations.NonNull;
 import com.android.annotations.Nullable;
 import com.android.prefs.AndroidLocation.AndroidLocationException;
+import com.android.repository.io.FileOpUtils;
 import com.android.resources.Density;
 import com.android.resources.ScreenSize;
 import com.android.sdklib.IAndroidTarget;
@@ -37,8 +38,9 @@ import com.android.sdklib.internal.avd.AvdInfo;
 import com.android.sdklib.internal.avd.AvdManager;
 import com.android.sdklib.internal.avd.AvdManager.AvdConflict;
 import com.android.sdklib.internal.avd.HardwareProperties;
-import com.android.sdklib.repository.local.LocalSdk;
+import com.android.sdklib.repositoryv2.AndroidSdkHandler;
 import com.android.sdklib.repositoryv2.IdDisplay;
+import com.android.sdklib.repositoryv2.LoggerProgressIndicatorWrapper;
 import com.android.utils.ILogger;
 import com.android.utils.Pair;
 import com.google.common.base.Joiner;
@@ -217,8 +219,8 @@ class AvdCreationPresenter {
 
 
     private void initializeDevices() {
-        LocalSdk localSdk = mAvdManager.getLocalSdk();
-        File location = localSdk.getLocation();
+        AndroidSdkHandler sdkHandler = mAvdManager.getSdkHandler();
+        File location = sdkHandler.getLocation();
         if (location != null) {
             DeviceManager deviceManager = DeviceManager.createInstance(location, mSdkLog);
             Collection<Device> deviceList = deviceManager.getDevices(DeviceManager.ALL_DEVICES);
@@ -462,9 +464,11 @@ class AvdCreationPresenter {
         index = -1;
 
         mComboTargets.clear();
-        LocalSdk localSdk = mAvdManager.getLocalSdk();
-        if (localSdk != null) {
-            for (IAndroidTarget target : localSdk.getTargets()) {
+        AndroidSdkHandler sdkHandler = mAvdManager.getSdkHandler();
+        if (sdkHandler != null) {
+            LoggerProgressIndicatorWrapper progress = new LoggerProgressIndicatorWrapper(mSdkLog);
+            for (IAndroidTarget target : sdkHandler.getAndroidTargetManager(progress)
+                    .getTargets(progress)) {
                 String name;
                 if (target.isPlatform()) {
                     name = String.format("%s - API Level %s",
@@ -599,7 +603,7 @@ class AvdCreationPresenter {
             }
 
             // path of sdk/system-images
-            String sdkSysImgPath = new File(mAvdManager.getLocalSdk().getLocation(),
+            String sdkSysImgPath = new File(mAvdManager.getSdkHandler().getLocation(),
                                             SdkConstants.FD_SYSTEM_IMAGES).getAbsolutePath();
 
             for (File skin : target.getSkins()) {
@@ -939,7 +943,7 @@ class AvdCreationPresenter {
 
         File avdFolder = null;
         try {
-            avdFolder = AvdInfo.getDefaultAvdFolder(mAvdManager, avdName);
+            avdFolder = AvdInfo.getDefaultAvdFolder(mAvdManager, avdName, FileOpUtils.create());
         } catch (AndroidLocationException e) {
             return false;
         }
@@ -1130,7 +1134,7 @@ class AvdCreationPresenter {
             // the AVD .ini skin path is relative to the SDK folder *or* is a numeric size.
             String skinIniPath = props.get(AvdManager.AVD_INI_SKIN_PATH);
             if (skinIniPath != null) {
-                File skinFolder = new File(mAvdManager.getLocalSdk().getLocation(), skinIniPath);
+                File skinFolder = new File(mAvdManager.getSdkHandler().getLocation(), skinIniPath);
 
                 for (int i = 0; i < mComboSkins.size(); i++) {
                     if (mComboSkins.get(i).hasPath() &&

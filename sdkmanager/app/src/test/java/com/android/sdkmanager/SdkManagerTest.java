@@ -18,6 +18,7 @@ package com.android.sdkmanager;
 
 
 import com.android.SdkConstants;
+import com.android.repository.io.FileOpUtils;
 import com.android.sdklib.IAndroidTarget;
 import com.android.sdklib.SdkManager;
 import com.android.sdklib.SdkManagerTestCase;
@@ -69,7 +70,7 @@ public class SdkManagerTest extends SdkManagerTestCase {
         makeFakeSkin(siArm, "Tag1ArmSkin");
 
         mTarget = getSdkManager().getTargets()[0];
-        mAvdFolder = AvdInfo.getDefaultAvdFolder(getAvdManager(), getName());
+        mAvdFolder = AvdInfo.getDefaultAvdFolder(getAvdManager(), getName(), FileOpUtils.create());
     }
 
     @Override

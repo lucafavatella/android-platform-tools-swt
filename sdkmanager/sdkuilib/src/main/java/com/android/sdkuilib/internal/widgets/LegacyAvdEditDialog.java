@@ -19,6 +19,8 @@ package com.android.sdkuilib.internal.widgets;
 import com.android.SdkConstants;
 import com.android.io.FileWrapper;
 import com.android.prefs.AndroidLocation.AndroidLocationException;
+import com.android.repository.api.ProgressIndicator;
+import com.android.repository.io.FileOpUtils;
 import com.android.sdklib.IAndroidTarget;
 import com.android.sdklib.ISystemImage;
 import com.android.sdklib.SystemImage;
@@ -28,8 +30,9 @@ import com.android.sdklib.internal.avd.AvdManager.AvdConflict;
 import com.android.sdklib.internal.avd.HardwareProperties;
 import com.android.sdklib.internal.avd.HardwareProperties.HardwareProperty;
 import com.android.sdklib.internal.project.ProjectProperties;
-import com.android.sdklib.repository.local.LocalSdk;
 import com.android.sdklib.repositoryv2.IdDisplay;
+import com.android.sdklib.repositoryv2.LoggerProgressIndicatorWrapper;
+import com.android.sdklib.repositoryv2.targets.AndroidTargetManager;
 import com.android.sdkuilib.internal.repository.icons.ImageFactory;
 import com.android.sdkuilib.ui.GridDialog;
 import com.android.utils.ILogger;
@@ -232,13 +235,10 @@ final class LegacyAvdEditDialog extends GridDialog {
 
         File hardwareDefs = null;
 
-        LocalSdk localSdk = avdManager.getLocalSdk();
-        if (localSdk != null) {
-            File sdkPath = localSdk.getLocation();
-            if (sdkPath != null) {
-                hardwareDefs = new File(new File(sdkPath, SdkConstants.OS_SDK_TOOLS_LIB_FOLDER),
-                                                          SdkConstants.FN_HARDWARE_INI);
-            }
+        File sdkPath = avdManager.getSdkHandler().getLocation();
+        if (sdkPath != null) {
+            hardwareDefs = new File(new File(sdkPath, SdkConstants.OS_SDK_TOOLS_LIB_FOLDER),
+                    SdkConstants.FN_HARDWARE_INI);
         }
 
         if (hardwareDefs == null) {
@@ -916,26 +916,26 @@ final class LegacyAvdEditDialog extends GridDialog {
         boolean found = false;
         index = -1;
 
-        LocalSdk localSdk = mAvdManager.getLocalSdk();
-        if (localSdk != null) {
-            for (IAndroidTarget target : localSdk.getTargets()) {
-                String name;
-                if (target.isPlatform()) {
-                    name = String.format("%s - API Level %s",
-                            target.getName(),
-                            target.getVersion().getApiString());
-                } else {
-                    name = String.format("%s (%s) - API Level %s",
-                            target.getName(),
-                            target.getVendor(),
-                            target.getVersion().getApiString());
-                }
-                mCurrentTargets.put(name, target);
-                mTargetCombo.add(name);
-                if (!found) {
-                    index++;
-                    found = name.equals(selected);
-                }
+        ProgressIndicator progress = new LoggerProgressIndicatorWrapper(mSdkLog);
+        AndroidTargetManager targetManager = mAvdManager.getSdkHandler()
+                .getAndroidTargetManager(progress);
+        for (IAndroidTarget target : targetManager.getTargets(progress)) {
+            String name;
+            if (target.isPlatform()) {
+                name = String.format("%s - API Level %s",
+                        target.getName(),
+                        target.getVersion().getApiString());
+            } else {
+                name = String.format("%s (%s) - API Level %s",
+                        target.getName(),
+                        target.getVendor(),
+                        target.getVersion().getApiString());
+            }
+            mCurrentTargets.put(name, target);
+            mTargetCombo.add(name);
+            if (!found) {
+                index++;
+                found = name.equals(selected);
             }
         }
 
@@ -1375,7 +1375,7 @@ final class LegacyAvdEditDialog extends GridDialog {
 
         File avdFolder = null;
         try {
-            avdFolder = AvdInfo.getDefaultAvdFolder(mAvdManager, avdName);
+            avdFolder = AvdInfo.getDefaultAvdFolder(mAvdManager, avdName, FileOpUtils.create());
         } catch (AndroidLocationException e) {
             return false;
         }

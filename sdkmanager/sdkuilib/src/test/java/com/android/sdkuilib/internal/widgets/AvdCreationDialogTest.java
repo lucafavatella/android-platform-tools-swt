@@ -20,6 +20,7 @@ import com.android.SdkConstants;
 import com.android.annotations.Nullable;
 import com.android.repository.Revision;
 import com.android.repository.io.FileOp;
+import com.android.repository.io.FileOpUtils;
 import com.android.sdklib.IAndroidTarget;
 import com.android.sdklib.ISystemImage.LocationType;
 import com.android.sdklib.SdkManager;
@@ -47,7 +48,7 @@ public class AvdCreationDialogTest extends SdkManagerTestCase {
 
         SdkManager sdkMan = getSdkManager();
         mTarget = sdkMan.getTargets()[0];
-        mAvdFolder = AvdInfo.getDefaultAvdFolder(getAvdManager(), getName());
+        mAvdFolder = AvdInfo.getDefaultAvdFolder(getAvdManager(), getName(), FileOpUtils.create());
 
         // add 4 system images for the target
         makeSystemImageFolder(new SystemImage(sdkMan, mTarget,
