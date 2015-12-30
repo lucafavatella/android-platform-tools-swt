@@ -278,8 +278,7 @@ public class Main {
      */
     private void parseSdk() {
         mSdkManager = SdkManager.createManager(mOsSdkFolder, mSdkLog);
-        mSdkHandler = AndroidSdkHandler.getInstance();
-        mSdkHandler.setLocation(new File(mOsSdkFolder));
+        mSdkHandler = AndroidSdkHandler.getInstance(new File(mOsSdkFolder));
 
         if (mSdkManager == null) {
             errorAndExit("Unable to parse SDK content.");

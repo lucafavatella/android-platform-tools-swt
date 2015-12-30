@@ -33,6 +33,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -59,7 +60,7 @@ public class SwtUpdaterData extends UpdaterData {
      * @param osSdkRoot The OS path to the SDK root.
      */
     public SwtUpdaterData(String osSdkRoot, ILogger sdkLog) {
-        super(AndroidSdkHandler.getInstance(), sdkLog);
+        super(AndroidSdkHandler.getInstance(new File(osSdkRoot)), sdkLog);
     }
 
     // ----- getters, setters ----
