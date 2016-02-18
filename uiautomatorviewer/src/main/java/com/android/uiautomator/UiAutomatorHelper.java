@@ -167,11 +167,13 @@ public class UiAutomatorHelper {
             throw new UiAutomatorException(msg, e);
         }
 
-        // rotate the screen shot per device rotation
-        BasicTreeNode root = model.getXmlRootNode();
-        if (root instanceof RootWindowNode) {
-            for (int i = 0; i < ((RootWindowNode)root).getRotation(); i++) {
-                rawImage = rawImage.getRotated();
+        // On pre-M platforms, we need to rotate the screen shot ourselves
+        if (device.getApiLevel() < 23) {
+            BasicTreeNode root = model.getXmlRootNode();
+            if (root instanceof RootWindowNode) {
+                for (int i = 0; i < ((RootWindowNode)root).getRotation(); i++) {
+                    rawImage = rawImage.getRotated();
+                }
             }
         }
         PaletteData palette = new PaletteData(
