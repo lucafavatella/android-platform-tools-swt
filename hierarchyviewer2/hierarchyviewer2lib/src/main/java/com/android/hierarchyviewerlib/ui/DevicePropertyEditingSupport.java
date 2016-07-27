@@ -17,6 +17,7 @@
 package com.android.hierarchyviewerlib.ui;
 
 import com.android.SdkConstants;
+import com.android.annotations.NonNull;
 import com.android.hierarchyviewerlib.device.IHvDevice;
 import com.android.hierarchyviewerlib.models.ViewNode;
 import com.android.hierarchyviewerlib.models.ViewNode.Property;
@@ -24,6 +25,7 @@ import com.android.utils.SdkUtils;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -130,7 +132,7 @@ public class DevicePropertyEditingSupport {
             }
 
             try {
-                SdkUtils.parseLocalizedInt(p.value);
+                parseLocalizedInt(p.value);
                 return true;
             } catch (ParseException e) {
                 return false;
@@ -272,16 +274,16 @@ public class DevicePropertyEditingSupport {
 
                 if (name.equals(PADDING_LEFT)) {
                     pLeft = propName.equals(PADDING_LEFT) ?
-                            v : SdkUtils.parseLocalizedInt(p.value, 0);
+                            v : parseLocalizedInt(p.value, 0);
                 } else if (name.equals(PADDING_RIGHT)) {
                     pRight = propName.equals(PADDING_RIGHT) ?
-                            v : SdkUtils.parseLocalizedInt(p.value, 0);
+                            v : parseLocalizedInt(p.value, 0);
                 } else if (name.equals(PADDING_TOP)) {
                     pTop = propName.equals(PADDING_TOP) ?
-                            v : SdkUtils.parseLocalizedInt(p.value, 0);
+                            v : parseLocalizedInt(p.value, 0);
                 } else if (name.equals(PADDING_BOTTOM)) {
                     pBottom = propName.equals(PADDING_BOTTOM) ?
-                            v : SdkUtils.parseLocalizedInt(p.value, 0);
+                            v : parseLocalizedInt(p.value, 0);
                 }
             }
 
@@ -299,4 +301,29 @@ public class DevicePropertyEditingSupport {
             return true;
         }
     }
+
+    /**
+     * Returns the given localized string as an int. For example, in the
+     * US locale, "1,000", will return 1000. In the French locale, "1.000" will return
+     * 1000.  If the format is invalid, returns the supplied default value instead.
+     *
+     * @param string the string to be parsed
+     * @param defaultValue the value to be returned if there is a parsing error
+     * @return the integer value
+     */
+    public static int parseLocalizedInt(@NonNull String string, int defaultValue) {
+        try {
+            return parseLocalizedInt(string);
+        } catch (ParseException e) {
+            return defaultValue;
+        }
+    }
+
+    public static int parseLocalizedInt(@NonNull String string) throws ParseException {
+        if (string.isEmpty()) {
+            return 0;
+        }
+        return NumberFormat.getIntegerInstance().parse(string).intValue();
+    }
+
 }
