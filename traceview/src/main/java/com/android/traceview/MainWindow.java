@@ -16,8 +16,6 @@
 
 package com.android.traceview;
 
-import com.android.sdkstats.SdkStatsService;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.window.ApplicationWindow;
@@ -225,13 +223,6 @@ public class MainWindow extends ApplicationWindow {
     public static void main(String[] args) {
         TraceReader reader = null;
         boolean regression = false;
-
-        // ping the usage server
-
-        String revision = getRevision();
-        if (revision != null) {
-            new SdkStatsService().ping(PING_NAME, revision);
-        }
 
         // Process command line arguments
         int argc = 0;
