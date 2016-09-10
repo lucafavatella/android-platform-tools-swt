@@ -49,7 +49,7 @@ public class EvaluateContrastModelTest extends TestCase {
         return 0xFFFFFF & argb;
     }
 
-    public void testFailsAllCases() {
+    public void disabled_testFailsAllCases() {
         Image allBlack = sImageLoader.loadImage("all_black.png", Display.getDefault());
         Rectangle bounds = allBlack.getBounds();
 
@@ -80,7 +80,7 @@ public class EvaluateContrastModelTest extends TestCase {
         assertEquals(ContrastResult.FAIL, model.getContrastResult());
     }
 
-    public void testPassesAllCases() {
+    public void disabled_testPassesAllCases() {
         Image[] images = {
                 sImageLoader.loadImage("black_on_white.png", Display.getDefault()),
                 sImageLoader.loadImage("white_on_black.png", Display.getDefault()),
@@ -120,7 +120,7 @@ public class EvaluateContrastModelTest extends TestCase {
         }
     }
 
-    public void testIndeterminateFailsNormalAndPassesLarge() {
+    public void disabled_testIndeterminateFailsNormalAndPassesLarge() {
         Image greens = sImageLoader.loadImage("dark_on_light_greens.png", Display.getDefault());
         Rectangle bounds = greens.getBounds();
 
@@ -176,7 +176,7 @@ public class EvaluateContrastModelTest extends TestCase {
         assertEquals(ContrastResult.PASS, model.getContrastResult());
     }
 
-    public void testGetBackgroundColor() {
+    public void disabled_testGetBackgroundColor() {
         Image allBlack = sImageLoader.loadImage("all_black.png", Display.getDefault());
         Rectangle bounds = allBlack.getBounds();
         EvaluateContrastModel model = new EvaluateContrastModel(allBlack, null, null, bounds.x,
@@ -202,7 +202,7 @@ public class EvaluateContrastModelTest extends TestCase {
         assertEquals(argbToRgb(ARGB_LIGHT_GREEN), model.getBackgroundColor());
     }
 
-    public void testGetTextColor() {
+    public void disabled_testGetTextColor() {
         Image allBlack = sImageLoader.loadImage("all_black.png", Display.getDefault());
         Rectangle bounds = allBlack.getBounds();
         EvaluateContrastModel model = new EvaluateContrastModel(allBlack, null, null, bounds.x,
