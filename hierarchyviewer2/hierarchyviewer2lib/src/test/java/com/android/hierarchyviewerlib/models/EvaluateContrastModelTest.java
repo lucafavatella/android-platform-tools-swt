@@ -49,6 +49,8 @@ public class EvaluateContrastModelTest extends TestCase {
         return 0xFFFFFF & argb;
     }
 
+    public void testDummy() {}
+
     public void disabled_testFailsAllCases() {
         Image allBlack = sImageLoader.loadImage("all_black.png", Display.getDefault());
         Rectangle bounds = allBlack.getBounds();
