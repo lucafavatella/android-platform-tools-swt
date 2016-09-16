@@ -3,7 +3,6 @@ archivesBaseName = 'traceview'
 
 dependencies {
     compile project(':base:common')
-    compile project(':swt:sdkstats')
 }
 
 sdk {
