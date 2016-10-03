@@ -26,22 +26,22 @@ cd /d %~dp0
 
 rem Check we have a valid Java.exe in the path.
 set java_exe=
-call lib\find_java.bat
+call ..\\lib\\find_java.bat
 if not defined java_exe goto :EOF
 
-set jarfile=monkeyrunner.jar
+for /f %%a in ("${classpath}") do set jarfile=%%~nxa
 set frameworkdir=.
 set libdir=
 
-if exist %frameworkdir%\%jarfile% goto JarFileOk
+if exist %frameworkdir%\\%jarfile% goto JarFileOk
     set frameworkdir=lib
 
-if exist %frameworkdir%\%jarfile% goto JarFileOk
-    set frameworkdir=..\framework
+if exist %frameworkdir%\\%jarfile% goto JarFileOk
+    set frameworkdir=..\\framework
 
 :JarFileOk
 
-set jarpath=%frameworkdir%\%jarfile%
+set jarpath=%frameworkdir%\\%jarfile%
 
 if not defined ANDROID_SWT goto QueryArch
     set swt_path=%ANDROID_SWT%
@@ -49,7 +49,7 @@ if not defined ANDROID_SWT goto QueryArch
 
 :QueryArch
 
-    for /f "delims=" %%a in ('"%java_exe%" -jar %frameworkdir%\archquery.jar') do set swt_path=%frameworkdir%\%%a
+    for /f "delims=" %%a in ('%frameworkdir%\\..\\bin\\archquery') do set swt_path=%frameworkdir%\\%%a
 
 :SwtDone
 
@@ -60,4 +60,4 @@ if exist "%swt_path%" goto SetPath
 
 :SetPath
 
-call "%java_exe%" -Xmx512m "-Djava.ext.dirs=%frameworkdir%;%swt_path%" -Dcom.android.monkeyrunner.bindir=..\framework -jar %jarpath% %*
+call "%java_exe%" -Xmx512m "-Djava.ext.dirs=%frameworkdir%;%swt_path%" -Dcom.android.monkeyrunner.bindir=..\\framework -jar %jarpath% %*

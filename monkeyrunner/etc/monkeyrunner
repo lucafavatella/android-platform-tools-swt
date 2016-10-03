@@ -15,46 +15,51 @@
 
 # Set up prog to be the path of this script, including following symlinks,
 # and set up progdir to be the fully-qualified pathname of its directory.
-prog="$0"
-while [ -h "${prog}" ]; do
-    newProg=`/bin/ls -ld "${prog}"`
-    newProg=`expr "${newProg}" : ".* -> \(.*\)$"`
-    if expr "x${newProg}" : 'x/' >/dev/null; then
-        prog="${newProg}"
+prog="\$0"
+while [ -h "\${prog}" ]; do
+    newProg=`/bin/ls -ld "\${prog}"`
+    newProg=`expr "\${newProg}" : ".* -> \\(.*\\)\$"`
+    if expr "x\${newProg}" : 'x/' >/dev/null; then
+        prog="\${newProg}"
     else
-        progdir=`dirname "${prog}"`
-        prog="${progdir}/${newProg}"
+        progdir=`dirname "\${prog}"`
+        prog="\${progdir}/\${newProg}"
     fi
 done
 oldwd=`pwd`
-progdir=`dirname "${prog}"`
-cd "${progdir}"
+progdir=`dirname "\${prog}"`
+cd "\${progdir}/.."
 progdir=`pwd`
-prog="${progdir}"/`basename "${prog}"`
-cd "${oldwd}"
+prog="\${progdir}"/bin/`basename "\${prog}"`
+cd "\${oldwd}"
 
-jarfile=monkeyrunner.jar
-frameworkdir="$progdir"
-libdir="$progdir"
-if [ ! -r "$frameworkdir/$jarfile" ]
+frameworkdir="\$progdir"
+libdir="\$progdir"
+jarfile=`basename "${classpath}"`
+if [ ! -r "\$frameworkdir/\${jarfile}" ]
 then
-    frameworkdir=`dirname "$progdir"`/tools/lib
-    libdir=`dirname "$progdir"`/tools/lib
+    frameworkdir="\$progdir"/lib
+    libdir="\$progdir"/lib
 fi
-if [ ! -r "$frameworkdir/$jarfile" ]
+if [ ! -r "\$frameworkdir/\${jarfile}" ]
 then
-    frameworkdir=`dirname "$progdir"`/framework
-    libdir=`dirname "$progdir"`/lib
+    frameworkdir=`dirname "\$progdir"`/tools/lib
+    libdir=`dirname "\$progdir"`/tools/lib
 fi
-if [ ! -r "$frameworkdir/$jarfile" ]
+if [ ! -r "\$frameworkdir/\${jarfile}" ]
 then
-    echo `basename "$prog"`": can't find $jarfile"
+    frameworkdir=`dirname "\$progdir"`/framework
+    libdir=`dirname "\$progdir"`/lib
+fi
+if [ ! -r "\$frameworkdir/\${jarfile}" ]
+then
+    echo `basename "\$prog"`": can't find \${jarfile}"
     exit 1
 fi
 
 
 # Check args.
-if [ debug = "$1" ]; then
+if [ debug = "\$1" ]; then
     # add this in for debugging
     java_debug=-agentlib:jdwp=transport=dt_socket,server=y,address=8050,suspend=y
     shift 1
@@ -62,11 +67,11 @@ else
     java_debug=
 fi
 
-if [ "$OSTYPE" = "cygwin" ] ; then
-    jarpath=`cygpath -w  "$frameworkdir/$jarfile"`
-    progdir=`cygpath -w  "$progdir"`
+if [ "\$OSTYPE" = "cygwin" ] ; then
+    jarpath=`cygpath -w  "\$frameworkdir/\${jarfile}"`
+    progdir=`cygpath -w  "\$progdir"`
 else
-    jarpath="$frameworkdir/$jarfile"
+    jarpath="\$frameworkdir/\${jarfile}"
 fi
 
 # Figure out the path to the swt.jar for the current architecture.
@@ -74,26 +79,26 @@ fi
 # else, if running in the Android source tree, then look for the correct swt folder in prebuilt
 # else, look for the correct swt folder in the SDK under tools/lib/
 swtpath=""
-if [ -n "$ANDROID_SWT" ]; then
-    swtpath="$ANDROID_SWT"
+if [ -n "\$ANDROID_SWT" ]; then
+    swtpath="\$ANDROID_SWT"
 else
-    vmarch=`java -jar "${frameworkdir}"/archquery.jar`
-    if [ -n "$ANDROID_BUILD_TOP" ]; then
+    vmarch=`"\${progdir}"/bin/archquery`
+    if [ -n "\$ANDROID_BUILD_TOP" ]; then
         osname=`uname -s | tr A-Z a-z`
-        swtpath="${ANDROID_BUILD_TOP}/prebuilts/tools/${osname}-${vmarch}/swt"
-    elif [ -d "$frameworkdir/$vmarch" ]; then
-        swtpath="${frameworkdir}/${vmarch}"
+        swtpath="\${ANDROID_BUILD_TOP}/prebuilts/tools/\${osname}-\${vmarch}/swt"
+    elif [ -d "\$frameworkdir/\$vmarch" ]; then
+        swtpath="\${frameworkdir}/\${vmarch}"
     else
-        swtpath="${frameworkdir}"
+        swtpath="\${frameworkdir}"
     fi
 fi
 
-if [ ! -d "$swtpath" ]; then
-    echo "SWT folder '${swtpath}' does not exist."
+if [ ! -d "\$swtpath" ]; then
+    echo "SWT folder '\${swtpath}' does not exist."
     echo "Please export ANDROID_SWT to point to the folder containing swt.jar for your platform."
     exit 1
 fi
 
 # need to use "java.ext.dirs" because "-jar" causes classpath to be ignored
 # might need more memory, e.g. -Xmx128M
-exec java -Xmx128M $os_opts $java_debug -Djava.ext.dirs="$frameworkdir:$swtpath" -Djava.library.path="$libdir" -Dcom.android.monkeyrunner.bindir="$progdir" -jar "$jarpath" "$@"
+exec java -Xmx128M \$os_opts \$java_debug -Djava.ext.dirs="\$frameworkdir:\$swtpath" -Djava.library.path="\$libdir" -Dcom.android.monkeyrunner.bindir="\$progdir" -jar "\$jarpath" "\$@"

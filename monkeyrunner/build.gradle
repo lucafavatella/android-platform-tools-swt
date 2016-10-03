@@ -20,18 +20,33 @@ sourceSets {
     test.resources.srcDir 'src/test/java'
 }
 
+task monkeyrunnerStartScripts(type: CreateStartScripts) {
+    classpath = project.getTasks().getAt(JavaPlugin.JAR_TASK_NAME).getOutputs().getFiles()
+    outputDir new File(project.getBuildDir(), 'scripts')
+    description 'Creates OS specific scripts to start monkeyrunner'
+    mainClassName = 'com.android.monkeyrunner.MonkeyRunnerStarter'
+    applicationName = 'monkeyrunner'
+    unixStartScriptGenerator.template = resources.text.fromFile('etc/monkeyrunner')
+    windowsStartScriptGenerator.template = resources.text.fromFile('etc/monkeyrunner.bat')
+}
+
+
 sdk {
-    linux {
-       item('etc/monkeyrunner')  { executable true }
-    }
-    mac {
-       item('etc/monkeyrunner')  { executable true }
+    common(mac, linux) {
+        item(new File(monkeyrunnerStartScripts.outputDir, 'monkeyrunner')) {
+            into 'bin'
+            builtBy 'monkeyrunnerStartScripts'
+        }
     }
     windows {
-       item 'etc/monkeyrunner.bat'
+        item(new File(monkeyrunnerStartScripts.outputDir, 'monkeyrunner.bat')) {
+            into 'bin'
+            builtBy 'monkeyrunnerStartScripts'
+        }
     }
 }
 
+
 // configure the manifest of the buildDistributionJar task.
-sdkJar.manifest.attributes("Main-Class": "com.android.monkeyrunner.MonkeyRunnerStarter")
+sdkJar.manifest.attributes('Main-Class': 'com.android.monkeyrunner.MonkeyRunnerStarter')
 
