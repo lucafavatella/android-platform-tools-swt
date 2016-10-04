@@ -16,48 +16,48 @@
 
 # Set up prog to be the path of this script, including following symlinks,
 # and set up progdir to be the fully-qualified pathname of its directory.
-prog="$0"
-while [ -h "${prog}" ]; do
-    newProg=`/bin/ls -ld "${prog}"`
-    newProg=`expr "${newProg}" : ".* -> \(.*\)$"`
-    if expr "x${newProg}" : 'x/' >/dev/null; then
-        prog="${newProg}"
+prog="\$0"
+while [ -h "\${prog}" ]; do
+    newProg=`/bin/ls -ld "\${prog}"`
+    newProg=`expr "\${newProg}" : ".* -> \\(.*\\)\$"`
+    if expr "x\${newProg}" : 'x/' >/dev/null; then
+        prog="\${newProg}"
     else
-        progdir=`dirname "${prog}"`
-        prog="${progdir}/${newProg}"
+        progdir=`dirname "\${prog}"`
+        prog="\${progdir}/\${newProg}"
     fi
 done
 oldwd=`pwd`
-progdir=`dirname "${prog}"`
-progname=`basename "${prog}"`
-cd "${progdir}"
+progdir=`dirname "\${prog}"`
+progname=`basename "\${prog}"`
+cd "\${progdir}/.."
 progdir=`pwd`
-prog="${progdir}"/"${progname}"
-cd "${oldwd}"
+prog="\${progdir}"/bin/"\${progname}"
+cd "\${oldwd}"
 
-jarfile=uiautomatorviewer.jar
-frameworkdir="$progdir"
-libdir="$progdir"
-if [ ! -r "$frameworkdir/$jarfile" ]
+jarfile=`basename ${classpath}`
+frameworkdir="\$progdir"
+libdir="\$progdir"
+if [ ! -r "\$frameworkdir/\$jarfile" ]
 then
-    frameworkdir=`dirname "$progdir"`/tools/lib
-    libdir=`dirname "$progdir"`/tools/lib
+    frameworkdir=`dirname "\$progdir"`/tools/lib
+    libdir=`dirname "\$progdir"`/tools/lib
 fi
-if [ ! -r "$frameworkdir/$jarfile" ]
+if [ ! -r "\$frameworkdir/\$jarfile" ]
 then
-    frameworkdir=`dirname "$progdir"`/framework
-    libdir=`dirname "$progdir"`/lib
+    frameworkdir=`dirname "\$progdir"`/framework
+    libdir=`dirname "\$progdir"`/lib
 fi
-if [ ! -r "$frameworkdir/$jarfile" ]
+if [ ! -r "\$frameworkdir/\$jarfile" ]
 then
-    echo "${progname}: can't find $jarfile"
+    echo "\${progname}: can't find \$jarfile"
     exit 1
 fi
 
 javaCmd="java"
 
 os=`uname`
-if [ $os == 'Darwin' ]; then
+if [ \$os == 'Darwin' ]; then
   javaOpts="-Xmx1600M -XstartOnFirstThread"
 else
   javaOpts="-Xmx1600M"
@@ -67,38 +67,38 @@ if [ `uname` = "Linux" ]; then
     export GDK_NATIVE_WINDOWS=true
 fi
 
-while expr "x$1" : 'x-J' >/dev/null; do
-    opt=`expr "x$1" : 'x-J\(.*\)'`
-    javaOpts="${javaOpts} -${opt}"
+while expr "x\$1" : 'x-J' >/dev/null; do
+    opt=`expr "x\$1" : 'x-J\\(.*\\)'`
+    javaOpts="\${javaOpts} -\${opt}"
     shift
 done
 
-jarpath="$frameworkdir/$jarfile"
+jarpath="\$frameworkdir/\$jarfile"
 
 # Figure out the path to the swt.jar for the current architecture.
 # if ANDROID_SWT is defined, then just use this.
 # else, if running in the Android source tree, then look for the correct swt folder in prebuilt
 # else, look for the correct swt folder in the SDK under tools/lib/
 swtpath=""
-if [ -n "$ANDROID_SWT" ]; then
-    swtpath="$ANDROID_SWT"
+if [ -n "\$ANDROID_SWT" ]; then
+    swtpath="\$ANDROID_SWT"
 else
-    vmarch=`${javaCmd} -jar "${frameworkdir}"/archquery.jar`
-    if [ -n "$ANDROID_BUILD_TOP" ]; then
+    vmarch=`"\${progdir}"/bin/archquery`
+    if [ -n "\$ANDROID_BUILD_TOP" ]; then
         osname=`uname -s | tr A-Z a-z`
-        swtpath="${ANDROID_BUILD_TOP}/prebuilts/tools/${osname}-${vmarch}/swt"
+        swtpath="\${ANDROID_BUILD_TOP}/prebuilts/tools/\${osname}-\${vmarch}/swt"
     else
-        swtpath="${frameworkdir}/${vmarch}"
+        swtpath="\${frameworkdir}/\${vmarch}"
     fi
 fi
 
 # Combine the swtpath and the framework dir path.
-if [ -d "$swtpath" ]; then
-    frameworkdir="${swtpath}:${frameworkdir}"
+if [ -d "\$swtpath" ]; then
+    frameworkdir="\${swtpath}:\${frameworkdir}"
 else
-    echo "SWT folder '${swtpath}' does not exist."
+    echo "SWT folder '\${swtpath}' does not exist."
     echo "Please export ANDROID_SWT to point to the folder containing swt.jar for your platform."
     exit 1
 fi
 
-exec "${javaCmd}" $javaOpts -Djava.ext.dirs="$frameworkdir" -Dcom.android.uiautomator.bindir="$progdir" -jar "$jarpath" "$@"
+exec "\${javaCmd}" \$javaOpts -Djava.ext.dirs="\$frameworkdir" -Dcom.android.uiautomator.bindir="\$progdir" -jar "\$jarpath" "\$@"
