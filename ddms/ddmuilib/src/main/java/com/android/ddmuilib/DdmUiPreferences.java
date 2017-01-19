@@ -34,7 +34,6 @@ public final class DdmUiPreferences {
     private static String sSymbolLocation =""; //$NON-NLS-1$
     private static String sAddr2LineLocation =""; //$NON-NLS-1$
     private static String sAddr2LineLocation64 =""; //$NON-NLS-1$
-    private static String sTraceviewLocation =""; //$NON-NLS-1$
 
     public static void setStore(IPreferenceStore store) {
         mStore = store;
@@ -75,14 +74,5 @@ public final class DdmUiPreferences {
     public static void setAddr2LineLocation64(String location) {
         sAddr2LineLocation64 = location;
     }
-
-    public static String getTraceview() {
-        return sTraceviewLocation;
-    }
-
-    public static void setTraceviewLocation(String location) {
-        sTraceviewLocation = location;
-    }
-
 
 }
