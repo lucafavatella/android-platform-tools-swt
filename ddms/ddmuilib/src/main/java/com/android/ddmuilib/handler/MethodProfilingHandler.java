@@ -154,42 +154,6 @@ public class MethodProfilingHandler extends BaseFileHandler
     }
 
     protected void open(String tempPath) {
-        // now that we have the file, we need to launch traceview
-        String[] command = new String[2];
-        command[0] = DdmUiPreferences.getTraceview();
-        command[1] = tempPath;
-
-        try {
-            final Process p = Runtime.getRuntime().exec(command);
-
-            // create a thread for the output
-            new Thread("Traceview output") {
-                @Override
-                public void run() {
-                    // create a buffer to read the stderr output
-                    InputStreamReader is = new InputStreamReader(p.getErrorStream());
-                    BufferedReader resultReader = new BufferedReader(is);
-
-                    // read the lines as they come. if null is returned, it's
-                    // because the process finished
-                    try {
-                        while (true) {
-                            String line = resultReader.readLine();
-                            if (line != null) {
-                                DdmConsole.printErrorToConsole("Traceview: " + line);
-                            } else {
-                                break;
-                            }
-                        }
-                        // get the return code from the process
-                        p.waitFor();
-                    } catch (Exception e) {
-                        Log.e("traceview", e);
-                    }
-                }
-            }.start();
-        } catch (IOException e) {
-            Log.e("traceview", e);
-        }
+        // Nothing, implemented in DeviceView
     }
 }
