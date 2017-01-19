@@ -78,14 +78,6 @@ import java.util.regex.Pattern;
  */
 public class DeviceExplorer extends Panel {
 
-    private final static String TRACE_KEY_EXT = ".key"; // $NON-NLS-1S
-    private final static String TRACE_DATA_EXT = ".data"; // $NON-NLS-1S
-
-    private static Pattern mKeyFilePattern = Pattern.compile(
-            "(.+)\\" + TRACE_KEY_EXT); // $NON-NLS-1S
-    private static Pattern mDataFilePattern = Pattern.compile(
-            "(.+)\\" + TRACE_DATA_EXT); // $NON-NLS-1S
-
     public static String COLUMN_NAME = "android.explorer.name"; //$NON-NLS-1S
     public static String COLUMN_SIZE = "android.explorer.size"; //$NON-NLS-1S
     public static String COLUMN_DATE = "android.explorer.data"; //$NON-NLS-1S
@@ -233,58 +225,6 @@ public class DeviceExplorer extends Panel {
             }
         });
 
-        // add support for double click
-        mTreeViewer.addDoubleClickListener(new IDoubleClickListener() {
-            @Override
-            public void doubleClick(DoubleClickEvent event) {
-                ISelection sel = event.getSelection();
-
-                if (sel instanceof IStructuredSelection) {
-                    IStructuredSelection selection = (IStructuredSelection) sel;
-
-                    if (selection.size() == 1) {
-                        FileEntry entry = (FileEntry)selection.getFirstElement();
-                        String name = entry.getName();
-
-                        FileEntry parentEntry = entry.getParent();
-
-                        // can't really do anything with no parent
-                        if (parentEntry == null) {
-                            return;
-                        }
-
-                        // check this is a file like we want.
-                        Matcher m = mKeyFilePattern.matcher(name);
-                        if (m.matches()) {
-                            // get the name w/o the extension
-                            String baseName = m.group(1);
-
-                            // add the data extension
-                            String dataName = baseName + TRACE_DATA_EXT;
-
-                            FileEntry dataEntry = parentEntry.findChild(dataName);
-
-                            handleTraceDoubleClick(baseName, entry, dataEntry);
-
-                        } else {
-                            m = mDataFilePattern.matcher(name);
-                            if (m.matches()) {
-                                // get the name w/o the extension
-                                String baseName = m.group(1);
-
-                                // add the key extension
-                                String keyName = baseName + TRACE_KEY_EXT;
-
-                                FileEntry keyEntry = parentEntry.findChild(keyName);
-
-                                handleTraceDoubleClick(baseName, keyEntry, entry);
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
         // setup drop listener
         mTreeViewer.addDropSupport(DND.DROP_COPY | DND.DROP_MOVE,
                 new Transfer[] { FileTransfer.getInstance() },
@@ -389,98 +329,6 @@ public class DeviceExplorer extends Panel {
     @Override
     public void setFocus() {
         mTree.setFocus();
-    }
-
-    /**
-     * Processes a double click on a trace file
-     * @param baseName the base name of the 2 files.
-     * @param keyEntry The FileEntry for the .key file.
-     * @param dataEntry The FileEntry for the .data file.
-     */
-    private void handleTraceDoubleClick(String baseName, FileEntry keyEntry,
-            FileEntry dataEntry) {
-        // first we need to download the files.
-        File keyFile;
-        File dataFile;
-        String path;
-        try {
-            // create a temp file for keyFile
-            File f = File.createTempFile(baseName, DdmConstants.DOT_TRACE);
-            f.delete();
-            f.mkdir();
-
-            path = f.getAbsolutePath();
-
-            keyFile = new File(path + File.separator + keyEntry.getName());
-            dataFile = new File(path + File.separator + dataEntry.getName());
-        } catch (IOException e) {
-            return;
-        }
-
-        // download the files
-        try {
-            SyncService sync = mCurrentDevice.getSyncService();
-            if (sync != null) {
-                ISyncProgressMonitor monitor = SyncService.getNullProgressMonitor();
-                sync.pullFile(keyEntry, keyFile.getAbsolutePath(), monitor);
-                sync.pullFile(dataEntry, dataFile.getAbsolutePath(), monitor);
-
-                // now that we have the file, we need to launch traceview
-                String[] command = new String[2];
-                command[0] = DdmUiPreferences.getTraceview();
-                command[1] = path + File.separator + baseName;
-
-                try {
-                    final Process p = Runtime.getRuntime().exec(command);
-
-                    // create a thread for the output
-                    new Thread("Traceview output") {
-                        @Override
-                        public void run() {
-                            // create a buffer to read the stderr output
-                            InputStreamReader is = new InputStreamReader(p.getErrorStream());
-                            BufferedReader resultReader = new BufferedReader(is);
-
-                            // read the lines as they come. if null is returned, it's
-                            // because the process finished
-                            try {
-                                while (true) {
-                                    String line = resultReader.readLine();
-                                    if (line != null) {
-                                        DdmConsole.printErrorToConsole("Traceview: " + line);
-                                    } else {
-                                        break;
-                                    }
-                                }
-                                // get the return code from the process
-                                p.waitFor();
-                            } catch (IOException e) {
-                            } catch (InterruptedException e) {
-
-                            }
-                        }
-                    }.start();
-
-                } catch (IOException e) {
-                }
-            }
-        } catch (IOException e) {
-            DdmConsole.printErrorToConsole(String.format(
-                    "Failed to pull %1$s: %2$s", keyEntry.getName(), e.getMessage()));
-            return;
-        } catch (SyncException e) {
-            if (e.wasCanceled() == false) {
-                DdmConsole.printErrorToConsole(String.format(
-                        "Failed to pull %1$s: %2$s", keyEntry.getName(), e.getMessage()));
-                return;
-            }
-        } catch (TimeoutException e) {
-            DdmConsole.printErrorToConsole(String.format(
-                    "Failed to pull %1$s: timeout", keyEntry.getName()));
-        } catch (AdbCommandRejectedException e) {
-            DdmConsole.printErrorToConsole(String.format(
-                    "Failed to pull %1$s: %2$s", keyEntry.getName(), e.getMessage()));
-        }
     }
 
     /**
