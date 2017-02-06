@@ -129,12 +129,13 @@ public class DevicePropertyEditingSupport {
                 return true;
             }
 
-            try {
-                SdkUtils.parseLocalizedInt(p.value);
-                return true;
-            } catch (ParseException e) {
-                return false;
-            }
+            return false;
+//            try {
+//                SdkUtils.parseLocalizedInt(p.value);
+//                return true;
+//            } catch (ParseException e) {
+//                return false;
+//            }
         }
 
         @Override
@@ -270,19 +271,19 @@ public class DevicePropertyEditingSupport {
                     continue;
                 }
 
-                if (name.equals(PADDING_LEFT)) {
-                    pLeft = propName.equals(PADDING_LEFT) ?
-                            v : SdkUtils.parseLocalizedInt(p.value, 0);
-                } else if (name.equals(PADDING_RIGHT)) {
-                    pRight = propName.equals(PADDING_RIGHT) ?
-                            v : SdkUtils.parseLocalizedInt(p.value, 0);
-                } else if (name.equals(PADDING_TOP)) {
-                    pTop = propName.equals(PADDING_TOP) ?
-                            v : SdkUtils.parseLocalizedInt(p.value, 0);
-                } else if (name.equals(PADDING_BOTTOM)) {
-                    pBottom = propName.equals(PADDING_BOTTOM) ?
-                            v : SdkUtils.parseLocalizedInt(p.value, 0);
-                }
+//                if (name.equals(PADDING_LEFT)) {
+//                    pLeft = propName.equals(PADDING_LEFT) ?
+//                            v : SdkUtils.parseLocalizedInt(p.value, 0);
+//                } else if (name.equals(PADDING_RIGHT)) {
+//                    pRight = propName.equals(PADDING_RIGHT) ?
+//                            v : SdkUtils.parseLocalizedInt(p.value, 0);
+//                } else if (name.equals(PADDING_TOP)) {
+//                    pTop = propName.equals(PADDING_TOP) ?
+//                            v : SdkUtils.parseLocalizedInt(p.value, 0);
+//                } else if (name.equals(PADDING_BOTTOM)) {
+//                    pBottom = propName.equals(PADDING_BOTTOM) ?
+//                            v : SdkUtils.parseLocalizedInt(p.value, 0);
+//                }
             }
 
             // invoke setPadding() on the device
