@@ -16,8 +16,6 @@
 
 package com.android.traceview;
 
-import com.android.utils.SdkUtils;
-
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
@@ -89,7 +87,7 @@ class ProfileProvider implements ITreeContentProvider {
 
     private MethodData doMatchName(String name, int startIndex) {
         // Check if the given "name" has any uppercase letters
-        boolean hasUpper = SdkUtils.hasUpperCaseCharacter(name);
+        boolean hasUpper = hasUpperCaseCharacter(name);
         for (int ii = startIndex; ii < mRoots.length; ++ii) {
             MethodData md = mRoots[ii];
             String fullName = md.getName();
@@ -463,5 +461,15 @@ class ProfileProvider implements ITreeContentProvider {
             tree.setRedraw(true);
             mTreeViewer.refresh();
         }
+    }
+
+    public static boolean hasUpperCaseCharacter(String s) {
+            for (int i = 0; i < s.length(); i++) {
+                    if (Character.isUpperCase(s.charAt(i))) {
+                            return true;
+                    }
+            }
+
+            return false;
     }
 }
