@@ -2,11 +2,11 @@
   <configuration default="false" name="hierarchyviewer2" type="Application" factoryName="Application">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
     <option name="MAIN_CLASS_NAME" value="com.android.hierarchyviewer.HierarchyViewerApplication" />
-    <option name="VM_PARAMETERS" value="-Xmx1024M -Dcom.android.hierarchyviewer.bindir=$ANDROID_SDK$/tools" />
+    <option name="VM_PARAMETERS" value="-Xmx1024M -XstartOnFirstThread -Dcom.android.hierarchyviewer.bindir=$ANDROID_SDK$/tools" />
     <option name="PROGRAM_PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-    <option name="ALTERNATIVE_JRE_PATH" value="" />
+    <option name="ALTERNATIVE_JRE_PATH" />
     <option name="ENABLE_SWING_INSPECTOR" value="false" />
     <option name="ENV_VARIABLES" />
     <option name="PASS_PARENT_ENVS" value="true" />
