@@ -9,3 +9,5 @@ dependencies {
 
     testCompile 'junit:junit:3.8.1'
 }
+
+javadoc.options.addStringOption('Xdoclint:none', '-quiet')
