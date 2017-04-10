@@ -25,25 +25,31 @@ import java.util.Iterator;
  */
 public class MonkeyRunnerOptionsTest extends TestCase {
   // We need to use a file that actually exists
-  private static final String FILENAME = "/etc/passwd";
+  private String myFileName;
+
+  public void setUp() throws Exception {
+    File tempFile = File.createTempFile("MonkeyRunnerOptionsTest", null);
+    tempFile.deleteOnExit();
+    myFileName = tempFile.getPath();
+  }
 
   public void testSimpleArgs() {
     MonkeyRunnerOptions options =
-      MonkeyRunnerOptions.processOptions(new String[] { FILENAME });
-    assertEquals(options.getScriptFile(), new File(FILENAME));
+      MonkeyRunnerOptions.processOptions(new String[] { myFileName });
+    assertEquals(options.getScriptFile(), new File(myFileName));
   }
 
   public void testParsingArgsBeforeScriptName() {
     MonkeyRunnerOptions options =
-      MonkeyRunnerOptions.processOptions(new String[] { "-be", "stub", FILENAME});
+      MonkeyRunnerOptions.processOptions(new String[] { "-be", "stub", myFileName});
     assertEquals("stub", options.getBackendName());
-    assertEquals(options.getScriptFile(), new File(FILENAME));
+    assertEquals(options.getScriptFile(), new File(myFileName));
   }
 
   public void testParsingScriptArgument() {
     MonkeyRunnerOptions options =
-      MonkeyRunnerOptions.processOptions(new String[] { FILENAME, "arg1", "arg2" });
-    assertEquals(options.getScriptFile(), new File(FILENAME));
+      MonkeyRunnerOptions.processOptions(new String[] { myFileName, "arg1", "arg2" });
+    assertEquals(options.getScriptFile(), new File(myFileName));
     Iterator<String> i = options.getArguments().iterator();
     assertEquals("arg1", i.next());
     assertEquals("arg2", i.next());
@@ -51,17 +57,17 @@ public class MonkeyRunnerOptionsTest extends TestCase {
 
   public void testParsingScriptArgumentWithDashes() {
     MonkeyRunnerOptions options =
-      MonkeyRunnerOptions.processOptions(new String[] { FILENAME, "--arg1" });
-    assertEquals(options.getScriptFile(), new File(FILENAME));
+      MonkeyRunnerOptions.processOptions(new String[] { myFileName, "--arg1" });
+    assertEquals(options.getScriptFile(), new File(myFileName));
     assertEquals("--arg1", options.getArguments().iterator().next());
   }
 
   public void testMixedArgs() {
     MonkeyRunnerOptions options =
-      MonkeyRunnerOptions.processOptions(new String[] { "-be", "stub", FILENAME,
+      MonkeyRunnerOptions.processOptions(new String[] { "-be", "stub", myFileName,
           "arg1", "--debug=True"});
     assertEquals("stub", options.getBackendName());
-    assertEquals(options.getScriptFile(), new File(FILENAME));
+    assertEquals(options.getScriptFile(), new File(myFileName));
     Iterator<String> i = options.getArguments().iterator();
     assertEquals("arg1", i.next());
     assertEquals("--debug=True", i.next());
