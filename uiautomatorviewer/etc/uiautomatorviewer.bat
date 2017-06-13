@@ -25,7 +25,7 @@ rem issues with directories containing whitespaces.
 cd /d %~dp0
 
 rem Get the CWD as a full path with short names only (without spaces)
-for %%i in ("%cd%\..") do set prog_dir=%%~fsi
+for %%i in ("%cd%\\..") do set prog_dir=%%~fsi
 
 rem Check we have a valid Java.exe in the path.
 set java_exe=
