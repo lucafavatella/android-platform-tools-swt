@@ -16,3 +16,7 @@ sourceSets {
 }
 
 javadoc.options.addStringOption('Xdoclint:none', '-quiet')
+
+jar {
+    from 'NOTICE'
+}
