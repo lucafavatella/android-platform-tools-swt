@@ -210,6 +210,7 @@ public class DdmViewDebugDevice extends AbstractHvDevice implements IDeviceChang
             HandleViewDebug.dumpViewHierarchy(c, viewRoot,
                     false /* skipChildren */,
                     true  /* includeProperties */,
+                    false,
                     handler);
         } catch (IOException e) {
             Log.e(TAG, e);
